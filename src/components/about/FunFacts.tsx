@@ -1,57 +1,46 @@
 import { motion } from 'motion/react';
 import { FUN_FACTS } from '../../data/content';
 import { SectionLabel } from '../SectionLabel';
-import { AnimatedCounter } from '../AnimatedCounter';
 import { TextReveal } from '../TextReveal';
 
 export const FunFacts = () => {
   return (
-    <section className="py-32 px-6 md:px-12 relative overflow-hidden">
-      {/* Background quote */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="text-[8vw] font-display font-bold text-white/[0.02] leading-tight text-center max-w-4xl">
-          "A streamlined solution build to power business."
+    <section className="py-24 px-6 md:px-12 relative bg-black overflow-hidden">
+      {/* Background Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none">
+        <span className="text-[20vw] font-black font-display leading-none whitespace-nowrap">
+          POINT5MEDIA
         </span>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionLabel number="04" text="FunFacts" />
 
-        <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tighter mb-4 max-w-2xl">
-          <TextReveal>"A streamlined solution build to power business."</TextReveal>
-        </h2>
-        <p className="text-foreground/40 text-sm md:text-base max-w-xl mb-16 leading-relaxed">
-          We're more than pixels and code — we're coffee lovers, cat people, meme sharers, and design geeks.
-        </p>
+        <div className="mt-12 text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight max-w-4xl mx-auto italic">
+            <TextReveal>"A streamlined solution build to power business."</TextReveal>
+          </h2>
+          <p className="text-foreground/40 text-lg mt-8 max-w-2xl mx-auto">
+            We’re more than pixels and code — we’re coffee lovers, cat people, meme sharers, and design geeks.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {FUN_FACTS.map((fact, i) => (
             <motion.div
               key={fact.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="relative glass rounded-2xl p-10 text-center group hover:border-accent/20 transition-all duration-500 gradient-border overflow-hidden"
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="p-10 rounded-3xl bg-white/[0.03] border border-white/10 text-center group hover:bg-accent transition-all duration-500"
             >
-              {/* Animated border glow */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                style={{
-                  background: 'radial-gradient(circle at 50% 50%, rgba(196, 239, 23, 0.05), transparent 70%)',
-                }}
-              />
-
-              <div className="relative z-10">
-                <AnimatedCounter
-                  value={fact.value}
-                  suffix={fact.suffix}
-                  className="text-6xl md:text-7xl font-display font-bold text-accent text-shadow-glow"
-                />
-                <p className="mt-4 text-foreground/40 text-sm uppercase tracking-widest font-medium">
-                  {fact.label}
-                </p>
-              </div>
+              <h3 className="text-5xl md:text-6xl font-bold font-display mb-2 text-white group-hover:text-black transition-colors">
+                {fact.number}
+              </h3>
+              <p className="text-foreground/40 text-sm font-mono uppercase tracking-widest group-hover:text-black/60 transition-colors">
+                {fact.label}
+              </p>
             </motion.div>
           ))}
         </div>

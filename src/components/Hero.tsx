@@ -32,14 +32,17 @@ export const Hero = () => {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
 
-  // Orbit rotation
-  const [orbitAngle, setOrbitAngle] = useState(0);
-  const isPaused = useRef(false);
-  useAnimationFrame(() => {
-    if (!isPaused.current) {
-      setOrbitAngle((prev) => (prev + ORBIT_SPEED) % 360);
-    }
+export const Hero = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
   });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -50]);
 
   return (
     <section
@@ -90,7 +93,7 @@ export const Hero = () => {
           <motion.h1
             className="text-[14vw] md:text-[7rem] lg:text-[8rem] font-display font-bold uppercase leading-[0.8] tracking-tighter mb-8 text-shadow-glow"
           >
-            <KineticText className="block">Point 5 Media</KineticText>
+            <KineticText className="block">POINT5MEDIA</KineticText>
           </motion.h1>
 
           {/* Description */}
@@ -121,11 +124,9 @@ export const Hero = () => {
         </div>
 
         {/* Social Media Orbital Ring (right side) */}
-        <div className="flex-shrink-0 relative z-20 lg:translate-x-[10vw] xl:translate-x-[15vw] 2xl:translate-x-[20vw]">
+        <div className="flex-shrink-0 relative z-20 lg:translate-x-[5vw]">
           <div
             className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px]"
-            onMouseEnter={() => (isPaused.current = true)}
-            onMouseLeave={() => (isPaused.current = false)}
           >
             {/* Outer decorative rings */}
             <motion.div
@@ -140,9 +141,11 @@ export const Hero = () => {
             />
 
             {/* Rotating orbit group: arc + dot + social icons */}
-            <div
-              className="absolute inset-0 transition-transform duration-100 ease-linear"
-              style={{ transform: `rotate(${orbitAngle}deg)` }}
+            <motion.div
+              className="absolute inset-0 will-change-transform"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+              style={{ transformOrigin: 'center' }}
             >
               {/* Glowing arc segment */}
               <svg className="absolute inset-0 w-full h-full rotate-[-45deg] opacity-80" viewBox="0 0 100 100">
@@ -167,7 +170,8 @@ export const Hero = () => {
 
               {/* Social icons positioned around the circle */}
               {SOCIAL_ORBIT.map((social, i) => {
-                const radius = 140;
+                // Responsive radius: smaller on mobile
+                const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 130 : 180;
                 const rad = (social.angle * Math.PI) / 180;
                 const x = Math.cos(rad) * radius;
                 const y = Math.sin(rad) * radius;
@@ -178,22 +182,25 @@ export const Hero = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute w-12 h-12 rounded-full bg-background border border-white/10 flex items-center justify-center text-foreground hover:bg-accent hover:text-background transition-all duration-500 hover:scale-125 z-30 shadow-xl"
+                    className="absolute w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border border-white/10 flex items-center justify-center text-foreground hover:bg-accent hover:text-background transition-all duration-500 hover:scale-125 z-30 shadow-xl"
                     style={{
                       left: `calc(50% + ${x}px - 24px)`,
                       top: `calc(50% + ${y}px - 24px)`,
-                      transform: `rotate(${-orbitAngle}deg)`,
+                      // This transform counter-rotates the icon so it stays upright
+                      // We'll use a CSS animation on the parent and counter it here if possible, 
+                      // but since we want performance, let's just let them rotate for now or fix them to parent.
+                      // Actually, let's keep them fixed to parent for better perf.
                     }}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.2 + i * 0.1, type: 'spring' }}
                     aria-label={social.label}
                   >
-                    <span className="text-sm font-bold">{social.icon}</span>
+                    <span className="text-sm md:text-xl font-bold">{social.icon}</span>
                   </motion.a>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </motion.div>

@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useTransform } from 'motion/react';
-import { useRef, type MouseEvent } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { useRef, type MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SERVICES } from '../../data/content';
 import { SectionLabel } from '../SectionLabel';
@@ -10,16 +10,23 @@ const ICONS: Record<string, any> = { Palette, Share2, TrendingUp, Camera, Heart,
 const ServiceCard = ({ service, index }: { service: typeof SERVICES[0]; index: number }) => {
   const Icon = ICONS[service.icon] || Palette;
   const ref = useRef<HTMLDivElement>(null);
+  
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-150, 150], [6, -6]);
-  const rotateY = useTransform(mouseX, [-150, 150], [-6, 6]);
 
-  const handleMouse = (e: MouseEvent) => {
+  const rotateX = useSpring(useTransform(mouseY, [-200, 200], [10, -10]), { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-200, 200], [-10, 10]), { stiffness: 150, damping: 20 });
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: MouseEvent) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    mouseX.set(x - rect.width / 2);
+    mouseY.set(y - rect.height / 2);
   };
 
   return (
@@ -28,58 +35,75 @@ const ServiceCard = ({ service, index }: { service: typeof SERVICES[0]; index: n
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      onMouseMove={handleMouse}
-      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
-      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      transition={{ delay: index * 0.1, duration: 0.8 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
+      style={{
+        rotateX: isHovered ? rotateX : 0,
+        rotateY: isHovered ? rotateY : 0,
+        transformPerspective: 1000,
+      }}
+      className="relative h-full"
     >
-      <Link to={`/services/${service.slug}`} className="block h-full">
-        <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-8 h-full group hover:border-accent/20 transition-all duration-500 relative overflow-hidden shadow-2xl">
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <Link to={`/services/${service.slug}`} className="block h-full group">
+        <div className="glass h-full rounded-[2rem] p-8 md:p-10 transition-all duration-500 hover:border-accent/30 overflow-hidden relative shadow-2xl">
+          {/* Dynamic Spotlight Glow */}
+          <motion.div
+            className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-300"
+            style={{
+              background: useTransform(
+                [mouseX, mouseY],
+                ([x, y]) => `radial-gradient(600px circle at ${Number(x) + (ref.current?.clientWidth || 0) / 2}px ${Number(y) + (ref.current?.clientHeight || 0) / 2}px, rgba(196, 239, 23, 0.1), transparent 80%)`
+              ),
+            }}
+          />
 
           <div className="relative z-10">
-            {/* Number */}
-            <div className="absolute top-0 right-0 text-6xl font-display font-bold text-white/[0.03] group-hover:text-accent/10 transition-colors">
-              {String(index + 1).padStart(2, '0')}
+            <div className="flex justify-between items-start mb-12">
+              <motion.div
+                className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-background transition-all duration-500 shadow-xl"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+              >
+                <Icon className="w-8 h-8 text-accent group-hover:text-background transition-colors" />
+              </motion.div>
+              
+              <div className="text-4xl font-display font-bold text-white/[0.02] group-hover:text-accent/10 transition-colors">
+                {String(index + 1).padStart(2, '0')}
+              </div>
             </div>
 
-            {/* Icon */}
-            <motion.div
-              className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-background transition-all shadow-sm"
-              whileHover={{ rotate: 10, scale: 1.1 }}
-            >
-              <Icon className="w-7 h-7 text-accent group-hover:text-background transition-colors" />
-            </motion.div>
-
-            {/* Title */}
-            <h3 className="text-xl font-bold font-display uppercase mb-3 text-white tracking-tight group-hover:text-accent transition-colors">
+            <h3 className="text-3xl font-bold font-display uppercase mb-4 text-foreground tracking-tight group-hover:text-accent transition-colors leading-tight">
               {service.title}
             </h3>
 
-            {/* Short desc */}
-            <p className="text-foreground/40 text-sm font-medium leading-relaxed mb-6 italic">
+            <p className="text-foreground/50 text-base font-medium leading-relaxed mb-8 italic">
               {service.shortDesc}
             </p>
 
-            {/* Feature tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-10">
               {service.features.map((feature) => (
-                <motion.span
+                <span
                   key={feature}
-                  className="text-[10px] uppercase tracking-wider font-bold px-3 py-1 bg-white/5 rounded-full border border-white/5 text-white/40 group-hover:text-accent group-hover:border-accent/10 transition-all"
+                  className="text-[10px] uppercase tracking-widest font-bold px-4 py-1.5 bg-white/5 rounded-full border border-white/5 text-foreground/40 group-hover:text-accent group-hover:border-accent/20 transition-all"
                 >
                   {feature}
-                </motion.span>
+                </span>
               ))}
             </div>
 
-            {/* CTA */}
-            <div className="flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-              Explore Details
-              <ArrowUpRight className="w-4 h-4" />
+            <div className="flex items-center gap-3 text-accent text-xs font-bold uppercase tracking-[0.2em] group-hover:gap-5 transition-all duration-500">
+              View Case Studies
+              <ArrowUpRight className="w-5 h-5" />
             </div>
           </div>
+          
+          {/* Bottom decorative line */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent/20 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
         </div>
       </Link>
     </motion.div>
@@ -88,15 +112,23 @@ const ServiceCard = ({ service, index }: { service: typeof SERVICES[0]; index: n
 
 export const ServiceCards = () => {
   return (
-    <section className="py-32 px-6 md:px-12">
+    <section className="py-32 px-6 md:px-12 relative">
+      <div className="absolute left-0 bottom-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] -z-10 -translate-x-1/2 translate-y-1/2" />
+      
       <div className="max-w-7xl mx-auto">
-        <SectionLabel number="02" text="Our Services" />
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+          <div className="max-w-2xl">
+            <SectionLabel number="02" text="Services" />
+            <h2 className="text-5xl md:text-7xl font-bold font-display tracking-tighter text-foreground uppercase leading-none mt-4">
+              Our Core <span className="text-accent italic">Expertise</span>
+            </h2>
+          </div>
+          <p className="text-foreground/40 text-sm md:text-base font-bold uppercase tracking-[0.2em] max-w-sm mb-2">
+            Delivering cutting-edge digital experiences that define the next generation of brands.
+          </p>
+        </div>
 
-        <p className="text-foreground/60 text-sm md:text-base font-bold uppercase tracking-widest max-w-xl mb-16">
-          Full-range digital services to help your brand stand out, connect, and grow.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((service, i) => (
             <ServiceCard key={service.slug} service={service} index={i} />
           ))}

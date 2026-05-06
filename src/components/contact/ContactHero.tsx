@@ -1,8 +1,13 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { COMPANY } from '../../data/content';
 import { SectionLabel } from '../SectionLabel';
 import { TextReveal } from '../TextReveal';
+import { Cover } from '../ui/cover';
+import { TextCarousel } from '../ui/text-carousel';
 import { Instagram, Facebook, Linkedin, Twitter, MessageCircle } from 'lucide-react';
+
+const WORDS = ["POINT5MEDIA", "STORYTELLING", "PRODUCTION", "CREATIVITY"];
 
 const SOCIAL_LINKS = [
   { icon: Twitter, href: COMPANY.socials.twitter, label: 'Twitter', color: 'hover:bg-sky-500/10 hover:border-sky-500/30 hover:text-sky-400' },
@@ -13,20 +18,41 @@ const SOCIAL_LINKS = [
 ];
 
 export const ContactHero = () => {
-  return (
-    <section className="py-20 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <SectionLabel number="11" text="Contact Us" />
 
-        <div className="flex flex-col lg:flex-row justify-between gap-12 mb-16">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tighter leading-[0.9] max-w-2xl text-black uppercase">
-            <TextReveal>Want to work with us?</TextReveal>
-            <br />
-            <TextReveal className="opacity-40" delay={0.3}>Let's connect</TextReveal>
-          </h2>
+  return (
+    <section className="py-32 px-6 md:px-12 text-center">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col items-center mb-16">
+          {/* Breadcrumbs matching AboutHero/PageHero */}
+          <nav className="flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-accent/40 mb-12">
+            <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+            <span className="w-4 h-[1px] bg-accent/20" />
+            <span className="text-foreground/80">Contact</span>
+          </nav>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full mb-12"
+          >
+            <Cover containerClassName="w-full py-16 md:py-24 bg-white/[0.01] border-y border-white/5">
+              <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter leading-[0.8] text-white uppercase">
+                <TextReveal>Let's Start a</TextReveal>
+                <br />
+                <span className="text-accent italic">Conversation</span>
+              </h2>
+            </Cover>
+          </motion.div>
+
+          <TextCarousel words={WORDS} />
+
+          <p className="text-foreground/40 text-lg md:text-xl font-medium max-w-2xl mb-16 italic">
+            Whether you have a fully-formed idea or just the spark of an ambition, we're here to help you turn it into a digital masterpiece.
+          </p>
 
           {/* Social links */}
-          <div className="flex flex-wrap gap-3 self-end">
+          <div className="flex flex-wrap justify-center gap-4">
             {SOCIAL_LINKS.map((social, i) => (
               <motion.a
                 key={social.label}
@@ -36,7 +62,7 @@ export const ContactHero = () => {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 + i * 0.08, type: 'spring' }}
-                className="flex items-center gap-2 px-5 py-3 rounded-full border border-black/10 bg-black/5 text-black font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 hover:bg-black hover:text-white shadow-sm"
+                className="flex items-center gap-3 px-6 py-4 rounded-full border border-white/10 bg-white/5 text-foreground font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-105 hover:bg-accent hover:text-background shadow-2xl"
               >
                 <social.icon className="w-4 h-4" />
                 {social.label}

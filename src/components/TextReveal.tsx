@@ -11,17 +11,16 @@ export const TextReveal = ({ children, className = '', delay = 0 }: TextRevealPr
   const words = children.split(' ');
 
   return (
-    <motion.span className={className}>
+    <div className={`inline-flex flex-wrap ${className}`}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden mr-[0.3em]">
+        <span key={i} className="inline-block mr-[0.3em] py-[0.1em]">
           <motion.span
             className="inline-block"
-            initial={{ y: '110%', rotateX: -80 }}
-            whileInView={{ y: '0%', rotateX: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{
-              duration: 0.7,
-              delay: delay + i * 0.04,
+              duration: 0.8,
+              delay: delay + i * 0.05,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
@@ -29,9 +28,10 @@ export const TextReveal = ({ children, className = '', delay = 0 }: TextRevealPr
           </motion.span>
         </span>
       ))}
-    </motion.span>
+    </div>
   );
 };
+
 
 // Char-by-char variant for headings
 export const TextRevealChars = ({ children, className = '', delay = 0 }: TextRevealProps) => {
@@ -43,9 +43,9 @@ export const TextRevealChars = ({ children, className = '', delay = 0 }: TextRev
         <motion.span
           key={i}
           className="inline-block"
-          initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{
             duration: 0.5,
             delay: delay + i * 0.02,

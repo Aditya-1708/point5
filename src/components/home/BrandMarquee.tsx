@@ -9,29 +9,29 @@ export const BrandMarquee = () => {
       {/* Background glow behind marquee matching reference */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-accent/5 blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-12">
-        <div className="flex-shrink-0">
+      <div className="flex flex-col gap-12">
+        <div className="px-6 md:px-12">
           <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-foreground/40 text-xs font-bold uppercase tracking-[0.3em] whitespace-nowrap"
+            className="text-foreground/30 text-[10px] font-bold uppercase tracking-[0.5em] text-center"
           >
-            Trusted by brands
+            Trusted by global brands & industry leaders
           </motion.p>
         </div>
 
-        <div className="flex-1 relative overflow-hidden">
-          {/* Gradient edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="relative w-full overflow-hidden">
+          {/* Gradient edges for seamless transition */}
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div className="flex whitespace-nowrap">
             <motion.div
               initial={{ x: 0 }}
               animate={{ x: "-50%" }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="flex items-center gap-12 md:gap-24 pr-12 md:pr-24"
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="flex items-center gap-24 md:gap-48 pr-24 md:pr-48"
             >
               {logos.map((logo, i) => (
                 <div
@@ -41,7 +41,7 @@ export const BrandMarquee = () => {
                   <img
                     src={logo.src}
                     alt={logo.name}
-                    className="h-10 md:h-14 w-auto object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-110"
+                    className="h-16 md:h-24 lg:h-32 w-auto object-contain opacity-60 hover:opacity-100 transition-all duration-700 hover:scale-105"
                     loading="lazy"
                   />
                 </div>

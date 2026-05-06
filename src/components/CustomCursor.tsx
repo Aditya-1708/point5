@@ -84,7 +84,7 @@ export const CustomCursor = () => {
           y: position.y - 16,
           width: isPointer ? 64 : 32,
           height: isPointer ? 64 : 32,
-          backgroundColor: isPointer ? 'rgba(196, 239, 23, 0.15)' : 'transparent',
+          backgroundColor: isPointer ? 'rgba(196, 239, 23, 0.15)' : 'rgba(196, 239, 23, 0)',
           borderColor: isPointer ? 'rgba(196, 239, 23, 0.6)' : 'rgba(196, 239, 23, 1)',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}

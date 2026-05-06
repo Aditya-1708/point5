@@ -5,6 +5,7 @@ import { Testimonials } from '../components/home/Testimonials';
 import { Founders } from '../components/home/Founders';
 import { ContactSection } from '../components/home/ContactSection';
 import { FaqSection } from '../components/home/FaqSection';
+import { TextCarousel } from '../components/ui/text-carousel';
 
 export const HomePage = () => {
   return (
@@ -17,6 +18,14 @@ export const HomePage = () => {
     >
       <Hero />
       <BrandMarquee />
+
+      <div className="py-20 bg-white/[0.01] border-y border-white/5 overflow-hidden">
+        <TextCarousel 
+          words={["POINT5MEDIA", "CINEMATIC", "INNOVATIVE", "STORYTELLING"]} 
+          className="h-[20rem] md:h-[30rem]"
+        />
+      </div>
+
       <Testimonials />
       <Founders />
       <ContactSection />

@@ -3,7 +3,7 @@
 // ============================================================
 
 export const COMPANY = {
-  name: "Point 5 Media",
+  name: "POINT5MEDIA",
   fullName: "Point 5 Media Productions",
   tagline: "Creative minds building impactful digital experience.",
   email: "point5media2022@gmail.com",
@@ -103,8 +103,17 @@ export const SERVICES: Service[] = [
     title: "Branding & Visual Identity",
     shortDesc: "We go beyond logos — building complete visual identities that tell your story and reflect your values.",
     fullDesc:
-      "We go beyond logos — building complete visual identities that tell your story and reflect your values. From color palettes to typography, tone of voice to brand guidelines, we shape every element to ensure your brand stands out across every touchpoint.",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "A brand is more than just a logo; it's the soul of your business. We craft comprehensive visual identities that resonate with your target audience and establish a lasting market presence. Our process involves deep research, strategic positioning, and meticulous design to ensure every touchpoint — from business cards to digital interfaces — speaks a consistent, powerful brand language. We help you build trust, command authority, and create an emotional connection with your customers through world-class design aesthetics.",
+    features: [
+      "Custom Logo Engineering",
+      "Dynamic Color Theory & Typography",
+      "Comprehensive Brand Style Guides",
+      "Visual Language Development",
+      "Motion Identity & Animated Logos",
+      "Stationery & Collateral Design",
+      "Brand Voice & Messaging Strategy",
+      "Creative Art Direction"
+    ],
     icon: "Palette",
   },
   {
@@ -112,8 +121,17 @@ export const SERVICES: Service[] = [
     title: "Social Media Management",
     shortDesc: "Let's Make Your Brand the Main Character — With the right strategy, we identify your ideal audience.",
     fullDesc:
-      "Let's Make Your Brand the Main Character — With the right strategy, we identify your ideal audience, understand where they spend their time, and place your brand right where it matters. Through intentional content and smart targeting, we turn attention into engagement, engagement into leads, and leads into loyal customers. Ready to grow with purpose and play it smart?",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "In today's digital-first world, your social media presence is your storefront. We turn your profiles into powerful engines for growth. By identifying your ideal audience and understanding their behaviors, we place your brand exactly where it needs to be. We manage everything from content creation and community engagement to platform-specific strategy, ensuring your brand stays relevant, active, and influential. Our goal is to transform passive scrollers into passionate advocates for your brand.",
+    features: [
+      "Strategic Content Calendars",
+      "High-Impact Reel Production",
+      "Community Engagement & Management",
+      "Influencer Partnership Strategy",
+      "Platform-Specific Analytics",
+      "Viral Hook Development",
+      "Social Media Branding",
+      "Trend Analysis & Execution"
+    ],
     icon: "Share2",
   },
   {
@@ -121,8 +139,17 @@ export const SERVICES: Service[] = [
     title: "SEO & Performance Marketing",
     shortDesc: "With the right blend of SEO and performance marketing, we make sure your brand stands out.",
     fullDesc:
-      "With the right blend of SEO and performance marketing, we make sure your brand doesn't just appear — it stands out. We optimize your presence to rank higher on search engines while running data-driven ad campaigns that target the right audience at the right time. Organic visibility builds trust. Performance marketing drives instant results. Together? More traffic, better leads, and measurable growth.",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "We combine the long-term compounding value of SEO with the immediate impact of performance marketing. Our data-driven approach ensures your brand dominates search results while simultaneously driving high-intent traffic through precision-targeted ad campaigns. We focus on ROI, not just clicks. By optimizing your conversion funnel and leveraging advanced tracking, we help you scale your business predictably and efficiently in the competitive digital landscape.",
+    features: [
+      "Technical & On-Page SEO",
+      "Google Ads (SEM) Management",
+      "Meta Ads Performance Scaling",
+      "Conversion Rate Optimization (CRO)",
+      "Keyword Competitive Analysis",
+      "High-Authority Link Building",
+      "ROI Tracking & Dashboards",
+      "Retargeting Funnel Engineering"
+    ],
     icon: "TrendingUp",
   },
   {
@@ -130,8 +157,17 @@ export const SERVICES: Service[] = [
     title: "Product & Model Shoots",
     shortDesc: "Your Brand Deserves the Spotlight — With powerful product and model photoshoots, we craft visual stories that sell.",
     fullDesc:
-      "Your Brand Deserves the Spotlight — With powerful product and model photoshoots, we don't just click pictures — we craft visual stories that sell. From concept and styling to lighting and direction, every detail is designed to elevate your brand and make your products stand out effortlessly. Striking visuals grab attention. Strategic imagery drives conversions.",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "Visuals are the bridge between your product and the customer's desire. We provide high-end photography and videography services that showcase your offerings in their best light. Whether it's a sleek product shoot or a high-fashion model campaign, we handle the entire production process from concept and set design to professional retouching. Our imagery is designed to stop the scroll, highlight quality, and instill the confidence your customers need to hit 'buy'.",
+    features: [
+      "E-commerce Product Photography",
+      "Lifestyle & Editorial Shoots",
+      "Professional Model Casting",
+      "Creative Set Design & Styling",
+      "Advanced High-End Retouching",
+      "Studio & On-Location Lighting",
+      "Stop-Motion & Product Videos",
+      "Color Correction & Grading"
+    ],
     icon: "Camera",
   },
   {
@@ -139,8 +175,17 @@ export const SERVICES: Service[] = [
     title: "Wedding Photography",
     shortDesc: "Your Story, Beautifully Captured — We don't just take pictures — we preserve emotions.",
     fullDesc:
-      "Your Story, Beautifully Captured 💍✨ — With our wedding photography, we don't just take pictures — we preserve emotions. From stolen glances to grand celebrations, every frame is thoughtfully composed to reflect your love story in its most authentic form. Timeless moments. Honest emotions. Cinematic memories — cherished forever.",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "Weddings are once-in-a-lifetime stories, and we believe they should be told with cinematic elegance. Our wedding photography team specializes in capturing the raw emotions, the candid smiles, and the grand traditions that make your day unique. We blend traditional coverage with modern documentary-style storytelling to create a timeless visual legacy. From the smallest detail to the most epic moment, we ensure your love story is preserved in its most authentic and beautiful form.",
+    features: [
+      "Cinematic Wedding Films",
+      "Candid & Traditional Photography",
+      "Pre-Wedding Concept Shoots",
+      "Luxury Photo Album Design",
+      "Same-Day Edit Highlights",
+      "Multi-Day Event Coverage",
+      "Drone Aerial Cinematography",
+      "Artistic Post-Production"
+    ],
     icon: "Heart",
   },
   {
@@ -148,8 +193,17 @@ export const SERVICES: Service[] = [
     title: "Event Photography & Videography",
     shortDesc: "Every Moment. Perfectly Framed. — We capture the energy, the atmosphere, and the emotion.",
     fullDesc:
-      "Every Moment. Perfectly Framed. 🎥✨ — With our event photography and videography, we don't just document occasions — we capture the energy, the atmosphere, and the emotion that makes them unforgettable. From candid interactions to grand highlights, every shot is crafted to tell your event's story with clarity and impact. Dynamic visuals. Seamless storytelling. Memories that last beyond the moment.",
-    features: ["Logo design", "Typography & color systems", "Brand guidelines", "Art Direction", "Motion Identity"],
+      "From high-stakes corporate conferences to vibrant cultural festivals, we capture the essence of your events with precision and creativity. We don't just document the occurrence; we capture the energy and the networking moments that matter. Our team provides fast turnaround for social media highlights while delivering professional, high-quality archives for your brand's future marketing needs. Make your event live on long after the last guest leaves.",
+    features: [
+      "Corporate Event Coverage",
+      "Live Concert & Festival Media",
+      "Real-Time Social Media Edits",
+      "Interview & Podcast Production",
+      "Keynote & Seminar Recording",
+      "Brand Activation Coverage",
+      "After-Movies & Highlight Reels",
+      "High-Resolution Event Archives"
+    ],
     icon: "Video",
   },
 ];
