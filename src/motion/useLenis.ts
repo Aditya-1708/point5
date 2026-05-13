@@ -9,7 +9,8 @@ export function useLenis(options?: LenisOptions) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
+    if (reducedMotion || isMobile) return;
 
     const lenis = new Lenis({
       lerp: 0.1,

@@ -31,18 +31,37 @@ export const TextHoverEffect = ({
   // Auto-animate: slowly move the reveal mask in a loop
   useEffect(() => {
     if (!automatic) return;
-    setHovered(true);
+    
     let frame: number;
     let t = 0;
+    let isVisible = false;
+
     const animate = () => {
+      if (!isVisible) return; // Skip updating if not visible
       t += 0.005;
       const cx = 50 + 30 * Math.cos(t);
       const cy = 50 + 30 * Math.sin(t * 0.7);
       setMaskPosition({ cx: `${cx}%`, cy: `${cy}%` });
       frame = requestAnimationFrame(animate);
     };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        isVisible = true;
+        setHovered(true);
+        frame = requestAnimationFrame(animate);
+      } else {
+        isVisible = false;
+        if (frame) cancelAnimationFrame(frame);
+      }
+    });
+
+    if (svgRef.current) observer.observe(svgRef.current);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [automatic]);
 
   return (

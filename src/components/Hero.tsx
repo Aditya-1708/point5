@@ -9,6 +9,7 @@ import { Spotlight } from './ui/Spotlight';
 import { BackgroundBeams } from './ui/BackgroundBeams';
 import { GridBackground } from './ui/GridBackground';
 import { EmeraldSphere3D } from './EmeraldSphere3D';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const SOCIAL_ORBIT = [
   { icon: '💬', href: COMPANY.socials.whatsapp, label: 'WhatsApp', angle: 0 },
@@ -21,6 +22,7 @@ const SOCIAL_ORBIT = [
 const ORBIT_SPEED = 0.05; // degrees per frame (~3 deg/sec at 60fps → full rotation ~120s)
 
 export const Hero = () => {
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -43,7 +45,7 @@ export const Hero = () => {
       <GridBackground className="opacity-20" />
 
       {/* Background Image with Parallax */}
-      <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 z-0">
+      <motion.div style={{ y: isMobile ? 0 : bgY, scale: isMobile ? 1 : bgScale }} className="absolute inset-0 z-0">
         <img
           src={HERO_BG}
           alt="Point 5 Media Productions"
@@ -132,8 +134,8 @@ export const Hero = () => {
             {/* Rotating orbit group: arc + dot + social icons */}
             <motion.div
               className="absolute inset-0 will-change-transform"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+              animate={isMobile ? { rotate: 0 } : { rotate: 360 }}
+              transition={isMobile ? { duration: 0 } : { duration: 120, repeat: Infinity, ease: "linear" }}
               style={{ transformOrigin: 'center' }}
             >
               {/* Glowing arc segment */}

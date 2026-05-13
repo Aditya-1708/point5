@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, useEffect, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, Torus, Environment, Float, MeshTransmissionMaterial, Preload } from '@react-three/drei';
 import * as THREE from 'three';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 /* ------------------------------------------------------------------ */
 /*  Inner 3D scene — receives "activated" boolean from the DOM wrapper */
@@ -215,6 +216,7 @@ const SphereFallback = () => (
 /* ------------------------------------------------------------------ */
 
 export const EmeraldSphere3D = () => {
+  const isMobile = useIsMobile();
   const [isReady, setIsReady] = useState(false);
   const [activated, setActivated] = useState(false);
   const [shockwave, setShockwave] = useState(false);
@@ -243,6 +245,15 @@ export const EmeraldSphere3D = () => {
       if (dwellTimer.current) clearTimeout(dwellTimer.current);
     };
   }, []);
+
+  // On mobile/tablet: skip WebGL entirely — show CSS fallback only
+  if (isMobile) {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <SphereFallback />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -287,7 +298,7 @@ export const EmeraldSphere3D = () => {
       <div className={`w-full h-full transition-opacity duration-1000 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
         <Canvas 
           camera={{ position: [0, 0, 10], fov: 45 }}
-          dpr={[1, 2]}
+          dpr={[1, 1.5]}
           gl={{ 
             powerPreference: 'high-performance', 
             antialias: true, 
@@ -339,3 +350,4 @@ export const EmeraldSphere3D = () => {
     </div>
   );
 };
+

@@ -1,5 +1,6 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useRef, type ReactNode, type MouseEvent } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface MagneticButtonProps {
 }
 
 export const MagneticButton = ({ children, className = '', onClick, strength = 0.3 }: MagneticButtonProps) => {
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -16,7 +18,7 @@ export const MagneticButton = ({ children, className = '', onClick, strength = 0
   const springY = useSpring(y, { stiffness: 300, damping: 20 });
 
   const handleMouse = (e: MouseEvent) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -25,9 +27,22 @@ export const MagneticButton = ({ children, className = '', onClick, strength = 0
   };
 
   const handleLeave = () => {
+    if (isMobile) return;
     x.set(0);
     y.set(0);
   };
+
+  if (isMobile) {
+    return (
+      <button
+        ref={ref}
+        onClick={onClick}
+        className={className}
+      >
+        {children}
+      </button>
+    );
+  }
 
   return (
     <motion.button

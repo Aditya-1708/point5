@@ -6,6 +6,7 @@ import type { Container, SingleOrMultiple } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import { cn } from "@/src/lib/utils";
 import { motion, useAnimation } from "motion/react";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 type ParticlesProps = {
   id?: string;
@@ -19,6 +20,7 @@ type ParticlesProps = {
   particleDensity?: number;
 };
 export const SparklesCore = (props: ParticlesProps) => {
+  const isMobile = useIsMobile();
   const {
     id,
     className,
@@ -68,8 +70,7 @@ export const SparklesCore = (props: ParticlesProps) => {
               enable: false,
               zIndex: 1,
             },
-
-            fpsLimit: 120,
+            fpsLimit: isMobile ? 30 : 60,
             interactivity: {
               events: {
                 onClick: {
@@ -230,7 +231,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   mode: "delete",
                   value: 0,
                 },
-                value: particleDensity || 120,
+                value: particleDensity || (isMobile ? 30 : 120),
               },
               opacity: {
                 value: {

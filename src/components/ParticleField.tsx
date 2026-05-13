@@ -37,10 +37,22 @@ export const ParticleField = ({ count = 40, color = '#C4EF17', className = '' }:
     resize();
     window.addEventListener('resize', resize);
 
+    let frameCount = 0;
+    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
+    const finalCount = count || (isMobile ? 15 : 40);
+
     // Init particles
-    particles.current = Array.from({ length: count }, () => createParticle(canvas.width, canvas.height));
+    particles.current = Array.from({ length: finalCount }, () => createParticle(canvas.width, canvas.height));
 
     const animate = () => {
+      animRef.current = requestAnimationFrame(animate);
+      
+      // On mobile, skip every other frame to halve the frame rate
+      if (isMobile) {
+        frameCount++;
+        if (frameCount % 2 === 0) return;
+      }
+
       if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -63,7 +75,6 @@ export const ParticleField = ({ count = 40, color = '#C4EF17', className = '' }:
       });
 
       ctx.globalAlpha = 1;
-      animRef.current = requestAnimationFrame(animate);
     };
 
     animate();
