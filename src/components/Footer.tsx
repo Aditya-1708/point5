@@ -7,6 +7,7 @@ const FOOTER_LINKS = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
   { label: 'Services', path: '/services' },
+  { label: 'Blog', path: '/blog' },
   { label: 'Contact Us', path: '/contact' },
 ];
 

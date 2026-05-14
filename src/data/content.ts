@@ -24,15 +24,16 @@ export const COMPANY = {
 };
 
 export const TEAM_MEMBERS = [
-  { name: "Team Member 1", role: "Creative Team", image: "/team/IMG_9879.webp", bio: "" },
-  { name: "Team Member 2", role: "Creative Team", image: "/team/IMG_9884.webp", bio: "" },
-  { name: "Team Member 3", role: "Creative Team", image: "/team/IMG_9887.webp", bio: "" },
-  { name: "Team Member 4", role: "Creative Team", image: "/team/IMG_9894.webp", bio: "" },
-  { name: "Team Member 5", role: "Creative Team", image: "/team/IMG_9898.webp", bio: "" },
-  { name: "Team Member 6", role: "Creative Team", image: "/team/IMG_9904.webp", bio: "" },
-  { name: "Team Member 7", role: "Creative Team", image: "/team/IMG_9926.webp", bio: "" },
-  { name: "Team Member 8", role: "Creative Team", image: "/team/IMG_9937.webp", bio: "" },
-  { name: "Team Member 9", role: "Creative Team", image: "/team/IMG_9948.webp", bio: "" },
+  { name: "Akanksha Pratap", role: "Agency Manager", image: "/team/IMG_9926.webp", bio: "" },
+  { name: "Simran Gupta", role: "Senior Social Manager", image: "/team/IMG_9937.webp", bio: "" },
+  { name: "Eshita Jaiswal", role: "Senior Social Manager", image: "/team/IMG_9948.webp", bio: "" },
+   { name: "Alok Jaiswal", role: "Director of Photography", image: "/team/IMG_9983.JPG.webp", bio: "" },
+  { name: "Neeraj Kumar Singh", role: "Senior Video Editor", image: "/team/IMG_9884.webp", bio: "" },
+   { name: "Jahnavi Pandey", role: "Video Editor", image: "/team/IMG_9887.webp", bio: "" },
+  { name: "Vasid Khan", role: "Graphic Designer", image: "/team/IMG_9879.webp", bio: "" },
+   { name: "Md Jishan", role: "Ad Manager", image: "/team/IMG_9904.webp", bio: "" },
+  { name: "Shreya Vishwakarma", role: "Social Media Intern", image: "/team/IMG_9894.webp", bio: "" },
+  { name: "Amaan Rashid", role: "Social Media Intern", image: "/team/IMG_9898.webp", bio: "" },
 ];
 
 export const BRAND_LOGOS = [
@@ -268,3 +269,39 @@ export const FAQS = [
 ];
 
 export const HERO_BG = "/hero/Point5-Media-Productions-Main-Banner.jpg";
+
+export const BLOG_POSTS = [
+  {
+    slug: "future-of-digital-storytelling",
+    title: "The Future of Digital Storytelling",
+    excerpt: "Explore how interactive experiences and immersive visuals are reshaping the way brands connect with audiences in the modern digital era.",
+    date: "May 12, 2026",
+    category: "Design & Innovation",
+    image: "/team/IMG_9879.webp",
+  },
+  {
+    slug: "mastering-social-media-growth",
+    title: "Mastering Social Media Growth",
+    excerpt: "Unlock the secrets to building a loyal online community. Discover the strategies we use to scale social media presence authentically.",
+    date: "April 28, 2026",
+    category: "Marketing",
+    image: "/team/IMG_9926.webp",
+  },
+  {
+    slug: "power-of-visual-identity",
+    title: "The Power of Visual Identity",
+    excerpt: "A deep dive into why your brand's colors, typography, and logo matter more than ever in a saturated digital market.",
+    date: "April 15, 2026",
+    category: "Branding",
+    image: "/team/IMG_9937.webp",
+  },
+  {
+    slug: "creating-cinematic-campaigns",
+    title: "Creating Cinematic Ad Campaigns",
+    excerpt: "Behind the scenes of our video production process. Learn how we translate brand values into compelling visual narratives.",
+    date: "March 30, 2026",
+    category: "Production",
+    image: "/team/IMG_9948.webp",
+  },
+];
+

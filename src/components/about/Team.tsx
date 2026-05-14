@@ -65,10 +65,10 @@ const TeamCard = ({ member, index }: { member: typeof TEAM_MEMBERS[0]; index: nu
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 + index * 0.1 }}
           >
-            <h3 className="text-3xl font-bold font-display uppercase tracking-tighter text-white mb-2">
+            <h3 className="text-xl md:text-2xl font-bold font-display uppercase leading-tight text-white mb-1">
               {member.name}
             </h3>
-            <p className="text-accent text-sm font-bold uppercase tracking-widest">
+            <p className="text-accent text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80">
               {member.role}
             </p>
           </motion.div>
