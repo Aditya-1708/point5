@@ -11,8 +11,8 @@ export const BlogPage = () => {
     <main className="bg-background text-foreground min-h-screen relative pt-32 pb-24">
       <PageDetailing />
       
-      {/* Decorative background blur */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* Decorative background — reduced to prevent scroll lag */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40vw] h-[30vh] bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Header Section */}
@@ -43,9 +43,10 @@ export const BlogPage = () => {
           {BLOG_POSTS.map((post, i) => (
             <motion.div
               key={post.slug}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.1, duration: 0.8 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: Math.min(i * 0.07, 0.35), duration: 0.6 }}
               className="group relative flex flex-col"
             >
               {/* Image Container */}

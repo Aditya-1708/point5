@@ -1,105 +1,103 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useReducedMotion } from '../motion/useReducedMotion';
 
 export const CustomCursor = () => {
   const reducedMotion = useReducedMotion();
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
-  const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
-  const [enabled, setEnabled] = useState(true);
+  const isPointer = useRef(false);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+
+  // Raw mouse motion values — no React state, no re-renders on mousemove
+  const rawX = useMotionValue(-100);
+  const rawY = useMotionValue(-100);
+
+  // Smooth spring for the ring cursor
+  const x = useSpring(rawX, { damping: 25, stiffness: 200, mass: 0.5 });
+  const y = useSpring(rawY, { damping: 25, stiffness: 200, mass: 0.5 });
+
+  // Faster spring for the center dot
+  const dotX = useSpring(rawX, { damping: 40, stiffness: 400, mass: 0.1 });
+  const dotY = useSpring(rawY, { damping: 40, stiffness: 400, mass: 0.1 });
 
   useEffect(() => {
-    if (reducedMotion) {
-      setEnabled(false);
-      return;
-    }
-
+    if (reducedMotion) return;
     const coarse = window.matchMedia?.('(pointer: coarse)')?.matches;
-    if (coarse) {
-      setEnabled(false);
-      return;
-    }
+    if (coarse) return;
 
-    let trailId = 0;
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      
+      rawX.set(e.clientX);
+      rawY.set(e.clientY);
+
+      // Imperatively update pointer state — avoids any React re-render
       const target = e.target as HTMLElement;
-      const computed = window.getComputedStyle(target);
-      setIsPointer(
-        computed.cursor === 'pointer' ||
+      const nowPointer =
         target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
-        target.closest('a') !== null ||
-        target.closest('button') !== null
-      );
+        !!target.closest('a') ||
+        !!target.closest('button') ||
+        window.getComputedStyle(target).cursor === 'pointer';
 
-      // Add trail dot
-      trailId++;
-      const newDot = { x: e.clientX, y: e.clientY, id: trailId };
-      setTrail(prev => [...prev.slice(-6), newDot]);
+      if (nowPointer !== isPointer.current) {
+        isPointer.current = nowPointer;
+        if (ringRef.current) {
+          ringRef.current.style.width = nowPointer ? '56px' : '32px';
+          ringRef.current.style.height = nowPointer ? '56px' : '32px';
+          ringRef.current.style.backgroundColor = nowPointer
+            ? 'rgba(196,239,23,0.15)'
+            : 'rgba(196,239,23,0)';
+          ringRef.current.style.borderColor = nowPointer
+            ? 'rgba(196,239,23,0.6)'
+            : 'rgba(196,239,23,1)';
+        }
+        if (dotRef.current) {
+          dotRef.current.style.transform = nowPointer ? 'translate(-50%,-50%) scale(0)' : 'translate(-50%,-50%) scale(1)';
+        }
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [reducedMotion]);
+  }, [reducedMotion, rawX, rawY]);
 
-  // Clean old trail dots
-  useEffect(() => {
-    if (!enabled) return;
-    const timer = setInterval(() => {
-      setTrail(prev => prev.slice(-4));
-    }, 100);
-    return () => clearInterval(timer);
-  }, [enabled]);
-
-  if (!enabled) return null;
+  // Don't render on touch devices or when reduced motion is preferred
+  if (reducedMotion) return null;
+  if (typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)')?.matches) return null;
 
   return (
     <>
-      {/* Trail dots */}
-      {trail.map((dot) => (
-        <motion.div
-          key={dot.id}
-          className="fixed top-0 left-0 rounded-full pointer-events-none z-[9998]"
-          initial={{ opacity: 0.3, scale: 1 }}
-          animate={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            x: dot.x - 3,
-            y: dot.y - 3,
-            width: 6,
-            height: 6,
-            backgroundColor: 'rgba(196, 239, 23, 0.3)',
-          }}
-        />
-      ))}
-
       {/* Main cursor ring */}
       <motion.div
-        className="fixed top-0 left-0 border-2 border-accent rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        animate={{
-          x: position.x - 16,
-          y: position.y - 16,
-          width: isPointer ? 64 : 32,
-          height: isPointer ? 64 : 32,
-          backgroundColor: isPointer ? 'rgba(196, 239, 23, 0.15)' : 'rgba(196, 239, 23, 0)',
-          borderColor: isPointer ? 'rgba(196, 239, 23, 0.6)' : 'rgba(196, 239, 23, 1)',
+        ref={ringRef}
+        className="fixed pointer-events-none z-[9999] mix-blend-difference border-2 border-accent rounded-full"
+        style={{
+          left: x,
+          top: y,
+          translateX: '-50%',
+          translateY: '-50%',
+          width: 32,
+          height: 32,
+          backgroundColor: 'rgba(196,239,23,0)',
+          borderColor: 'rgba(196,239,23,1)',
+          transition: 'width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease',
+          willChange: 'transform',
         }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200, mass: 0.5 }}
       />
-
       {/* Center dot */}
       <motion.div
-        className="fixed top-0 left-0 bg-accent rounded-full pointer-events-none z-[9999]"
-        animate={{
-          x: position.x - 2.5,
-          y: position.y - 2.5,
-          scale: isPointer ? 0 : 1,
+        ref={dotRef}
+        className="fixed pointer-events-none z-[9999] bg-accent rounded-full"
+        style={{
+          left: dotX,
+          top: dotY,
+          translateX: '-50%',
+          translateY: '-50%',
+          transform: 'translate(-50%,-50%) scale(1)',
+          width: 5,
+          height: 5,
+          transition: 'transform 0.15s ease',
+          willChange: 'transform',
         }}
-        transition={{ type: 'spring', damping: 40, stiffness: 400, mass: 0.1 }}
-        style={{ width: 5, height: 5 }}
       />
     </>
   );

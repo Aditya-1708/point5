@@ -56,28 +56,20 @@ export const Testimonials = () => {
           {/* Floating Avatars */}
           <div className="absolute inset-0 pointer-events-none">
             {TESTIMONIALS.map((t, i) => {
-              // Position avatars in an elliptical arrangement to avoid text
               const angle = (i / TESTIMONIALS.length) * Math.PI * 2;
-              const radiusX = 450; // wider horizontal radius
-              const radiusY = 280; // shorter vertical radius
+              const radiusX = 450;
+              const radiusY = 280;
+              const floatDelay = i * 0.5;
               
               return (
-                <motion.div
+                <div
                   key={i}
                   className="absolute hidden md:block"
-                  animate={{
-                    y: [0, -15, 0],
-                    x: [0, 10, 0],
-                  }}
-                  transition={{
-                    duration: 5 + i,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.5
-                  }}
                   style={{
                     left: `calc(50% + ${Math.cos(angle) * radiusX}px - 40px)`,
                     top: `calc(50% + ${Math.sin(angle) * radiusY}px - 40px)`,
+                    animation: `floatAvatar ${5 + i}s ease-in-out infinite`,
+                    animationDelay: `${floatDelay}s`,
                   }}
                 >
                   <div 
@@ -105,10 +97,18 @@ export const Testimonials = () => {
                       <div className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(196,239,23,0.4)] animate-pulse pointer-events-none" />
                     )}
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
+
+          <style>{`
+            @keyframes floatAvatar {
+              0%, 100% { transform: translateY(0px) translateX(0px); }
+              33% { transform: translateY(-12px) translateX(8px); }
+              66% { transform: translateY(-6px) translateX(-4px); }
+            }
+          `}</style>
 
           {/* Central Active Testimonial */}
           <AnimatePresence mode="wait">

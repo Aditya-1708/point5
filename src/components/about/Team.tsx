@@ -11,8 +11,8 @@ const TeamCard = ({ member, index }: { member: typeof TEAM_MEMBERS[0]; index: nu
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useTransform(mouseY, [-150, 150], [8, -8]);
-  const rotateY = useTransform(mouseX, [-150, 150], [-8, 8]);
+  const rotateX = useTransform(mouseY, [-150, 150], [5, -5]);
+  const rotateY = useTransform(mouseX, [-150, 150], [-5, 5]);
 
   const handleMouse = (e: MouseEvent) => {
     if (!cardRef.current) return;
@@ -29,49 +29,45 @@ const TeamCard = ({ member, index }: { member: typeof TEAM_MEMBERS[0]; index: nu
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: Math.min(index * 0.06, 0.4), duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      style={{ rotateX, rotateY, transformPerspective: 1000, willChange: 'transform' }}
       className="relative group cursor-pointer"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-white/[0.03] border border-white/5 group-hover:border-accent/20 transition-all duration-500 shadow-2xl">
+      <div className="relative overflow-hidden rounded-3xl bg-white/[0.03] border border-white/5 group-hover:border-accent/20 transition-colors duration-300 shadow-xl">
         {/* Image */}
         <div className="aspect-[4/5] overflow-hidden">
-          <motion.img
+          <img
             src={member.image}
             alt={member.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            style={{ willChange: 'transform' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
         </div>
 
-        {/* Plus button matching reference */}
-        <motion.div
-          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center text-background shadow-2xl z-20 group-hover:bg-accent transition-colors duration-500"
-          whileHover={{ rotate: 90, scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+        {/* Plus button */}
+        <div
+          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center text-background shadow-xl z-20 group-hover:bg-accent transition-colors duration-300"
+          style={{ transition: 'background-color 0.3s ease' }}
         >
           <Plus className="w-6 h-6" />
-        </motion.div>
+        </div>
 
         {/* Info overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 + index * 0.1 }}
-          >
-            <h3 className="text-xl md:text-2xl font-bold font-display uppercase leading-tight text-white mb-1">
-              {member.name}
-            </h3>
-            <p className="text-accent text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80">
-              {member.role}
-            </p>
-          </motion.div>
+          <h3 className="text-xl md:text-2xl font-bold font-display uppercase leading-tight text-white mb-1">
+            {member.name}
+          </h3>
+          <p className="text-accent text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80">
+            {member.role}
+          </p>
         </div>
       </div>
     </motion.div>
@@ -83,9 +79,15 @@ export const Team = () => {
   useScrollTypeLink(headingRef);
 
   return (
-    <section className="py-32 px-6 md:px-12 relative overflow-hidden bg-background border-t border-white/5">
-      {/* Background text 'CREATIVE TEAM' */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none overflow-hidden">
+    <section
+      className="py-32 px-6 md:px-12 relative overflow-hidden bg-background border-t border-white/5"
+      style={{ contain: 'layout style' }}
+    >
+      {/* Background text — isolated from scroll repaints */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none overflow-hidden"
+        aria-hidden="true"
+      >
         <h2 className="text-[18vw] font-display font-bold uppercase tracking-tighter text-white/[0.02] leading-none whitespace-nowrap">
           Creative
         </h2>
@@ -94,9 +96,9 @@ export const Team = () => {
         </h2>
       </div>
 
-      {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-accent/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[30vw] h-[30vw] bg-accent/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
+      {/* Decorative blobs — reduced size & blur to avoid costly recompositing on scroll */}
+      <div className="absolute top-0 left-0 w-[20vw] h-[20vw] bg-accent/5 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ willChange: 'auto' }} />
+      <div className="absolute bottom-0 right-0 w-[15vw] h-[15vw] bg-accent/5 rounded-full blur-[60px] translate-x-1/3 translate-y-1/3 pointer-events-none" style={{ willChange: 'auto' }} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">

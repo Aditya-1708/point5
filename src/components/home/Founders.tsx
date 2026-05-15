@@ -32,10 +32,10 @@ const FounderCard = ({ founder, index }: { founder: typeof FOUNDERS[0]; index: n
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouse}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      style={{ rotateX, rotateY, transformPerspective: 800, willChange: 'transform' }}
       className="relative group cursor-pointer"
     >
       <div className="relative overflow-hidden rounded-3xl bg-white/[0.03] border border-white/5 group-hover:border-accent/20 transition-all duration-500 shadow-2xl">
@@ -95,8 +95,8 @@ export const Founders = () => {
       </div>
 
       {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-accent/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[30vw] h-[30vw] bg-accent/5 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[20vw] h-[20vw] bg-accent/5 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[15vw] h-[15vw] bg-accent/5 rounded-full blur-[60px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
