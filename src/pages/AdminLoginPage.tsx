@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { signinAdmin, getMe } from "../api/auth";
+import { useAuth } from "../context/AuthContext";
 
 export const AdminLoginPage = () => {
   const navigate = useNavigate();
+  const { signin, user, loading } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        await getMe();
-
-        navigate("/admin");
-      } catch (error) {
-        // not authenticated
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
+    if (!loading && user) {
+      navigate("/admin");
+    }
+  }, [user, loading, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -40,19 +32,16 @@ export const AdminLoginPage = () => {
     e.preventDefault();
 
     try {
-      setLoading(true);
+      setIsSubmitting(true);
       setError("");
 
-      await signinAdmin({
-        email: formData.email,
-        password: formData.password,
-      });
+      await signin(formData.email, formData.password);
 
       navigate("/admin");
     } catch (err: any) {
       setError(err?.response?.data?.message || "Invalid credentials");
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -106,10 +95,10 @@ export const AdminLoginPage = () => {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isSubmitting}
             className="w-full bg-white text-black font-semibold py-3 rounded-2xl hover:opacity-90 transition disabled:opacity-50"
           >
-            {loading ? "Signing In..." : "Login"}
+            {isSubmitting ? "Signing In..." : "Login"}
           </button>
 
           <button

@@ -2,7 +2,9 @@
 
 import { useNavigate } from "react-router-dom";
 
-import { logoutAdmin } from "../api/auth";
+import { useAuth } from "../context/AuthContext";
+
+import { AdminCrudPanel } from "../components/admin/AdminCrudPanel";
 
 import { ContactEntriesPanel } from "../components/admin/ContactEntriesPanel";
 
@@ -12,10 +14,11 @@ import { PortfolioCrudPanel } from "../components/admin/PortfolioCrudPanel";
 
 export const AdminPage = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await logoutAdmin();
+      await logout();
 
       navigate("/admin/login");
     } catch (error) {
@@ -51,18 +54,18 @@ export const AdminPage = () => {
 
       {/* CONTENT */}
       <section className="max-w-7xl mx-auto px-6 py-10 space-y-10">
-        {/* CONTACT ENTRIES */}
+        {/* ADMIN MANAGEMENT */}
         <div className="border border-white/10 rounded-3xl bg-white/[0.03] overflow-hidden">
           <div className="border-b border-white/10 px-6 py-5">
-            <h2 className="text-2xl font-semibold">Contact Entries</h2>
+            <h2 className="text-2xl font-semibold">Admin Management</h2>
 
             <p className="text-white/50 mt-1">
-              View all contact form submissions.
+              Create and manage admin accounts.
             </p>
           </div>
 
           <div className="p-6">
-            <ContactEntriesPanel />
+            <AdminCrudPanel />
           </div>
         </div>
 
@@ -93,6 +96,21 @@ export const AdminPage = () => {
 
           <div className="p-6">
             <PortfolioCrudPanel />
+          </div>
+        </div>
+
+        {/* CONTACT ENTRIES */}
+        <div className="border border-white/10 rounded-3xl bg-white/[0.03] overflow-hidden">
+          <div className="border-b border-white/10 px-6 py-5">
+            <h2 className="text-2xl font-semibold">Contact Entries</h2>
+
+            <p className="text-white/50 mt-1">
+              View all contact form submissions.
+            </p>
+          </div>
+
+          <div className="p-6">
+            <ContactEntriesPanel />
           </div>
         </div>
       </section>
