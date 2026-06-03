@@ -1,7 +1,6 @@
 import { motion, useMotionValue, useTransform } from 'motion/react';
 import { TEAM_MEMBERS } from '../../data/content';
 import { SectionLabel } from '../SectionLabel';
-import { Plus } from 'lucide-react';
 import { useRef, type MouseEvent } from 'react';
 import { KineticText } from '../motion/KineticText';
 import { useScrollTypeLink } from '../../motion/useScrollTypeLink';
@@ -52,13 +51,7 @@ const TeamCard = ({ member, index }: { member: typeof TEAM_MEMBERS[0]; index: nu
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
         </div>
 
-        {/* Plus button */}
-        <div
-          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center text-background shadow-xl z-20 group-hover:bg-accent transition-colors duration-300"
-          style={{ transition: 'background-color 0.3s ease' }}
-        >
-          <Plus className="w-6 h-6" />
-        </div>
+
 
         {/* Info overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8 z-10">

@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 
 interface SectionLabelProps {
-  number: string;
+  number?: string;
   text: string;
 }
 
@@ -15,7 +15,7 @@ export const SectionLabel = ({ number, text }: SectionLabelProps) => (
   >
     <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse-glow" />
     <span className="text-sm md:text-base text-foreground/50 tracking-wide font-medium">
-      <span className="text-accent font-mono">{`{${number}}`}</span>{' '}{text}
+      {text}
     </span>
   </motion.div>
 );

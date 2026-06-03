@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useAnimationFrame } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Instagram, Facebook, Linkedin } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { COMPANY, HERO_BG } from '../data/content';
@@ -11,12 +11,24 @@ import { GridBackground } from './ui/GridBackground';
 import { EmeraldSphere3D } from './EmeraldSphere3D';
 import { useIsMobile } from '../hooks/useIsMobile';
 
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6" {...props}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6" {...props}>
+    <path d="M19.005 4.908A9.817 9.817 0 0 0 11.992 2C6.534 2 2.085 6.448 2.08 11.91c0 1.748.458 3.45 1.321 4.956L2 22l5.251-1.378a9.808 9.808 0 0 0 4.74 1.226h.004c5.454 0 9.905-4.449 9.91-9.913a9.813 9.813 0 0 0-2.899-6.927zM12 20.354a8.17 8.17 0 0 1-4.173-1.144l-.299-.177-3.1 3.1 3.155-3.03-.326-.188A8.172 8.172 0 0 1 3.75 11.91c0-4.502 3.666-8.169 8.178-8.169a8.17 8.17 0 0 1 5.782 2.396 8.175 8.175 0 0 1 2.392 5.79c-.005 4.505-3.673 8.177-8.102 8.177zm4.473-6.096c-.244-.122-1.448-.715-1.673-.797-.225-.082-.39-.122-.553.122-.163.245-.631.797-.773.96-.143.163-.286.184-.53.062a6.673 6.673 0 0 1-1.967-1.214 7.37 7.37 0 0 1-1.36-1.693c-.143-.245-.015-.378.107-.5a6.45 6.45 0 0 0 .5-.674c.061-.122.03-.245-.015-.327-.045-.082-.39-.939-.533-1.286-.14-.337-.295-.29-.405-.296-.105-.005-.225-.005-.347-.005s-.327.046-.49.225c-.163.18-.633.619-.633 1.512s.653 1.758.744 1.88c.092.122 1.284 1.962 3.112 2.753.435.188.775.3 1.04.385.437.14.835.12 1.15.073.35-.053 1.448-.592 1.653-1.164.205-.572.205-1.063.143-1.165-.062-.102-.225-.184-.469-.306z"/>
+  </svg>
+);
+
 const SOCIAL_ORBIT = [
-  { icon: '💬', href: COMPANY.socials.whatsapp, label: 'WhatsApp', angle: 0 },
-  { icon: '𝕏', href: COMPANY.socials.twitter, label: 'Twitter', angle: 72 },
-  { icon: 'in', href: COMPANY.socials.linkedin, label: 'LinkedIn', angle: 144 },
-  { icon: '📷', href: COMPANY.socials.instagram, label: 'Instagram', angle: 216 },
-  { icon: 'f', href: COMPANY.socials.facebook, label: 'Facebook', angle: 288 },
+  { icon: WhatsAppIcon, href: COMPANY.socials.whatsapp, label: 'WhatsApp', angle: 0 },
+  { icon: XIcon, href: COMPANY.socials.twitter, label: 'Twitter', angle: 72 },
+  { icon: Linkedin, href: COMPANY.socials.linkedin, label: 'LinkedIn', angle: 144 },
+  { icon: Instagram, href: COMPANY.socials.instagram, label: 'Instagram', angle: 216 },
+  { icon: Facebook, href: COMPANY.socials.facebook, label: 'Facebook', angle: 288 },
 ];
 
 const ORBIT_SPEED = 0.05; // degrees per frame (~3 deg/sec at 60fps → full rotation ~120s)
@@ -73,7 +85,7 @@ export const Hero = () => {
             className="text-accent text-xs uppercase tracking-[0.3em] font-bold mb-6 flex items-center gap-2"
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            We're on social media:
+            Lets explore new realms of creativity!
           </motion.div>
 
           {/* Headline */}
@@ -126,6 +138,26 @@ export const Hero = () => {
               animate={{ rotate: -360 }}
               transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             />
+
+            {/* Centered Company Logo */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.4, duration: 0.8 }}
+                className="flex flex-col items-center justify-center bg-background/50 backdrop-blur-xl border border-white/10 w-24 h-24 md:w-36 md:h-36 rounded-full shadow-[0_0_50px_rgba(196,239,23,0.15)]"
+              >
+                <span className="font-display font-bold text-[10px] md:text-sm tracking-[0.25em] text-white/50 leading-none mb-1 uppercase">
+                  POINT
+                </span>
+                <span className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 bg-accent rounded-xl text-background font-bold text-sm md:text-2xl shadow-[0_0_25px_rgba(196,239,23,0.5)] my-0.5 animate-pulse">
+                  5
+                </span>
+                <span className="font-display font-bold text-[10px] md:text-sm tracking-[0.25em] text-white/50 leading-none mt-1 uppercase">
+                  MEDIA
+                </span>
+              </motion.div>
+            </div>
 
             {/* Rotating orbit group: arc + dot + social icons */}
             <motion.div
@@ -183,7 +215,7 @@ export const Hero = () => {
                     transition={{ delay: 1.2 + i * 0.1, type: 'spring' }}
                     aria-label={social.label}
                   >
-                    <span className="text-sm md:text-xl font-bold">{social.icon}</span>
+                    <social.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </motion.a>
                 );
               })}

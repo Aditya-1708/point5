@@ -20,7 +20,7 @@ const SOCIAL_LINKS = [
 export const ContactHero = () => {
 
   return (
-    <section className="relative min-h-[70vh] flex items-center overflow-hidden pt-32 pb-20 text-center">
+    <section className="relative min-h-[70vh] flex items-start md:items-center overflow-hidden pt-36 md:pt-32 pb-20 text-center">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-16">
           {/* Breadcrumbs matching AboutHero/PageHero */}
@@ -37,7 +37,7 @@ export const ContactHero = () => {
             className="w-full mb-12"
           >
             <Cover containerClassName="w-full py-16 md:py-24 bg-white/[0.01] border-y border-white/5">
-              <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter leading-[0.8] text-white uppercase">
+              <h2 className="text-[12vw] md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter leading-[0.8] text-white uppercase">
                 <TextReveal>Let's Start a</TextReveal>
                 <br />
                 <span className="text-accent italic">Conversation</span>

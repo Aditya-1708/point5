@@ -19,7 +19,7 @@ export const PageHero = ({ title, accentTitle, breadcrumb }: PageHeroProps) => {
   const blur = useTransform(scrollYProgress, [0, 0.5], [0, 10]);
 
   return (
-    <section ref={ref} className="relative min-h-[70vh] flex items-center overflow-hidden pt-32 pb-20 bg-background">
+    <section ref={ref} className="relative min-h-[70vh] flex items-start md:items-center overflow-hidden pt-36 md:pt-32 pb-20 bg-background">
       {/* Parallax Background */}
       <motion.div style={{ y, scale, filter: `blur(${blur}px)` }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
@@ -44,7 +44,7 @@ export const PageHero = ({ title, accentTitle, breadcrumb }: PageHeroProps) => {
             className="w-full mb-16"
           >
             <Cover containerClassName="w-full py-16 md:py-24 bg-white/[0.01] border-y border-white/5">
-              <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
+              <h1 className="text-[12vw] md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
                 <TextReveal>{title}</TextReveal>
                 {accentTitle && (
                   <>

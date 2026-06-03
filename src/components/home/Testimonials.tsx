@@ -114,10 +114,23 @@ export const Testimonials = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.4}
+              onDragEnd={(_, info) => {
+                const swipeThreshold = 50;
+                if (info.offset.x < -swipeThreshold) {
+                  // Swipe left -> next testimonial
+                  setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+                } else if (info.offset.x > swipeThreshold) {
+                  // Swipe right -> prev testimonial
+                  setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+                }
+              }}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 1.1, y: -20 }}
-              className="max-w-2xl text-center relative z-10 px-6"
+              className="max-w-2xl text-center relative z-10 px-6 cursor-grab active:cursor-grabbing select-none w-full flex flex-col items-center"
             >
               <motion.div
                 initial={{ rotate: -10, opacity: 0 }}

@@ -8,11 +8,10 @@ export const COMPANY = {
   tagline: "Creative minds building impactful digital experience.",
   email: "point5media2022@gmail.com",
   phones: ["+91 73554 15186", "+91 83183 36283"],
-  address:
-    "Plot No. 575/A, Manas Nagar Extension Durgakund, Varanasi, Uttar Pradesh – 221005, India",
-  hours: "Monday – Saturday: 8:00 AM – 10:00 PM",
+  address: "Plot No. 575/A, Manas Nagar Extension Durgakund, Varanasi, Uttar Pradesh – 221005, India",
+  hours: "Monday – Saturday: 10:00 AM – 08:00 PM",
   heroDescription:
-    "a multidisciplinary creative consultancy and a results-driven digital marketing agency that assists brands in growing, connecting, and thriving in the digital world. We specialize in creating engaging campaigns and building strong social media brands that bring ideas to life.",
+    "A multidisciplinary creative consultancy and a results-driven digital marketing agency that assists brands in growing, connecting, and thriving in the digital world. We specialize in creating engaging campaigns and building strong social media brands that bring ideas to life.",
   aboutDescription:
     "At Point 5 Media Productions, we believe that every story deserves to be seen, felt, and remembered. We are a creative agency crafting high-impact visual content — from brand reels, ad films, and corporate shoots to event highlights and wedding films — designed to captivate, engage, and convert.\n\nOver the last 3 years, we've partnered with 50+ brands and individuals, transforming their ideas into visually stunning experiences. Our portfolio proudly includes projects with Uttar Pradesh Police, the Indian Army (39 GTC), YouTube documentaries, podcasts, and a diverse range of commercial and creative ventures.",
   socials: {

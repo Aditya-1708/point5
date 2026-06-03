@@ -8,7 +8,7 @@ import { TextReveal } from '../TextReveal';
 
 export const AboutHero = () => {
   return (
-    <section className="relative min-h-[70vh] flex items-center overflow-hidden pt-32 pb-20">
+    <section className="relative min-h-[70vh] flex items-start md:items-center overflow-hidden pt-36 md:pt-32 pb-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
 
@@ -43,7 +43,7 @@ export const AboutHero = () => {
               className="mb-16"
             >
               <Cover containerClassName="w-full py-12 md:py-20 bg-white/[0.01] border-y border-white/5">
-                <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
+                <h1 className="text-[12vw] md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
                   Defining the <br /> <span className="text-accent italic">Future</span>
                 </h1>
               </Cover>
@@ -54,20 +54,20 @@ export const AboutHero = () => {
                 We are a multidisciplinary team of creative minds passionate about crafting visual stories and digital experiences that push the boundaries of what's possible.
               </p>
 
-              <div className="flex items-center justify-center gap-12">
-                <div className="flex flex-col items-center">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 w-full px-4">
+                <div className="flex flex-col items-center text-center">
                   <span className="text-3xl font-bold text-white tracking-tighter">03+</span>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold mt-1">Years Experience</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-accent font-bold mt-1 text-center">Years Experience</span>
                 </div>
-                <div className="w-[1px] h-12 bg-white/10" />
-                <div className="flex flex-col items-center">
+                <div className="hidden sm:block w-[1px] h-12 bg-white/10" />
+                <div className="flex flex-col items-center text-center">
                   <span className="text-3xl font-bold text-white tracking-tighter">50+</span>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold mt-1">Global Brands</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-accent font-bold mt-1 text-center">Global Brands</span>
                 </div>
-                <div className="w-[1px] h-12 bg-white/10" />
-                <div className="flex flex-col items-center">
+                <div className="hidden sm:block w-[1px] h-12 bg-white/10" />
+                <div className="flex flex-col items-center text-center">
                   <span className="text-3xl font-bold text-white tracking-tighter">24/7</span>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-accent font-bold mt-1">Creative Support</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-accent font-bold mt-1 text-center">Creative Support</span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,6 @@
 import { motion, useMotionValue, useTransform } from 'motion/react';
 import { FOUNDERS } from '../../data/content';
 import { SectionLabel } from '../SectionLabel';
-import { Plus } from 'lucide-react';
 import { useRef, type MouseEvent } from 'react';
 import { KineticText } from '../motion/KineticText';
 import { useScrollTypeLink } from '../../motion/useScrollTypeLink';
@@ -49,14 +48,7 @@ const FounderCard = ({ founder, index }: { founder: typeof FOUNDERS[0]; index: n
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700" />
         </div>
 
-        {/* Plus button matching reference */}
-        <motion.div
-          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white flex items-center justify-center text-background shadow-2xl z-20 group-hover:bg-accent transition-colors duration-500"
-          whileHover={{ rotate: 90, scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Plus className="w-6 h-6" />
-        </motion.div>
+
 
         {/* Info overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
