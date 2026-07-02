@@ -5,7 +5,13 @@ import { Testimonials } from '../components/home/Testimonials';
 import { Founders } from '../components/home/Founders';
 import { ContactSection } from '../components/home/ContactSection';
 import { FaqSection } from '../components/home/FaqSection';
+import { Features } from '../components/home/Features';
 import { TextCarousel } from '../components/ui/text-carousel';
+import { PortfolioShowcase } from '../components/services/PortfolioShowcase';
+import { ProcessSteps } from '../components/services/ProcessSteps';
+import { ImpactStats } from '../components/home/ImpactStats';
+import { Container } from '../components/layout/Container';
+import { Section } from '../components/layout/Section';
 
 export const HomePage = () => {
   return (
@@ -25,6 +31,23 @@ export const HomePage = () => {
           className="py-12"
         />
       </div>
+
+      <Features />
+
+      <Section className="bg-background pt-0">
+        <Container>
+          <PortfolioShowcase 
+            serviceType={null} 
+            sectionNumber="03" 
+            sectionTitle="Recent Work" 
+            featured={true} 
+          />
+        </Container>
+      </Section>
+
+      <ProcessSteps />
+      
+      <ImpactStats />
 
       <Testimonials />
       <Founders />

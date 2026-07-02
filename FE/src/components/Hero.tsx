@@ -67,7 +67,7 @@ export const Hero = () => {
       <div className="noise-bg absolute inset-0 z-[2]" />
 
       {/* 3D Sphere Background */}
-      <div className="absolute inset-0 z-[1] flex items-center justify-center opacity-50">
+      <div className="absolute inset-0 z-[1] flex items-center justify-center opacity-50 pointer-events-none">
          <EmeraldSphere3D />
       </div>
 
@@ -145,17 +145,14 @@ export const Hero = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.4, duration: 0.8 }}
-                className="flex flex-col items-center justify-center bg-background/50 backdrop-blur-xl border border-white/10 w-24 h-24 md:w-36 md:h-36 rounded-full shadow-[0_0_50px_rgba(196,239,23,0.15)]"
+                className="flex items-center justify-center bg-background/60 backdrop-blur-xl border border-accent/20 w-24 h-24 md:w-36 md:h-36 rounded-full shadow-[0_0_50px_rgba(196,239,23,0.2),inset_0_0_30px_rgba(196,239,23,0.05)]"
               >
-                <span className="font-display font-bold text-[10px] md:text-sm tracking-[0.25em] text-white/50 leading-none mb-1 uppercase">
-                  POINT
-                </span>
-                <span className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 bg-accent rounded-xl text-background font-bold text-sm md:text-2xl shadow-[0_0_25px_rgba(196,239,23,0.5)] my-0.5 animate-pulse">
-                  5
-                </span>
-                <span className="font-display font-bold text-[10px] md:text-sm tracking-[0.25em] text-white/50 leading-none mt-1 uppercase">
-                  MEDIA
-                </span>
+                <img
+                  src="/logo-camera.jpg"
+                  alt="Point5 Media"
+                  className="w-16 h-16 md:w-24 md:h-24 object-contain rounded-full"
+                  style={{ filter: 'invert(1) drop-shadow(0 0 8px rgba(196,239,23,0.6))' }}
+                />
               </motion.div>
             </div>
 

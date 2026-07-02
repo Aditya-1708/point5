@@ -15,10 +15,10 @@ export const AboutServices = () => {
 
         <div className="flex flex-col md:flex-row justify-between gap-8 mb-16">
           <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tighter leading-[0.9] max-w-lg">
-            <TextReveal>We are offering the best solutions</TextReveal>
+            <TextReveal>Our Core Expertise</TextReveal>
           </h2>
           <p className="text-foreground/40 text-sm max-w-sm leading-relaxed self-end">
-            We offer a full range of digital services to help your brand stand out, connect, and grow.
+            Tailored strategies designed to scale your brand's digital presence and achieve measurable growth.
           </p>
         </div>
 

@@ -10,11 +10,12 @@ import {
   Zap,
   Trophy,
   Shield,
-  Rocket,
 } from "lucide-react";
 import { GridBackground } from "../ui/GridBackground";
 import { BackgroundBeams } from "../ui/BackgroundBeams";
 import { PortfolioShowcase } from "./PortfolioShowcase";
+import { SocialMediaShowcase } from "./SocialMediaShowcase";
+import { EventVideoGrid } from "./EventVideoGrid";
 
 import { PageDetailing } from "../ui/PageDetailing";
 
@@ -65,9 +66,9 @@ export const ServiceDetail = () => {
 
         <section className="py-32 px-6 md:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
               {/* Main Content */}
-              <div className="lg:col-span-8">
+              <div className="md:col-span-7 lg:col-span-8">
                 <div className="mb-20">
                   <SectionLabel number="01" text="Overview" />
                   <motion.h2
@@ -178,31 +179,10 @@ export const ServiceDetail = () => {
                   sectionNumber="04"
                   sectionTitle="Featured Work"
                 />
-
-                {/* CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="mt-24 p-12 glass rounded-[3rem] border-accent/20 text-center relative overflow-hidden group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <Rocket className="w-12 h-12 text-accent mx-auto mb-6 group-hover:scale-125 transition-transform duration-500" />
-                  <h3 className="text-3xl md:text-4xl font-bold font-display uppercase tracking-tighter mb-6">
-                    Ready to scale your brand?
-                  </h3>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-3 bg-accent text-background px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-[0_0_30px_rgba(196,239,23,0.3)]"
-                  >
-                    Start Your Project
-                    <ArrowUpRight className="w-5 h-5" />
-                  </Link>
-                </motion.div>
               </div>
 
               {/* Sidebar - Other Services */}
-              <div className="lg:col-span-4">
+              <div className="md:col-span-5 lg:col-span-4">
                 <div className="sticky top-32">
                   <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/30 mb-8 flex items-center gap-3">
                     <span className="w-8 h-[1px] bg-foreground/20" />
@@ -249,6 +229,16 @@ export const ServiceDetail = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Conditional Custom Components (Full Width) */}
+            <div className="w-full">
+              {service.slug === "social-media-management" && (
+                <SocialMediaShowcase />
+              )}
+              {service.slug === "event-photography-videography" && (
+                <EventVideoGrid />
+              )}
             </div>
           </div>
         </section>

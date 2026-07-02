@@ -14,7 +14,7 @@ export const FunFacts = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <SectionLabel number="04" text="FunFacts" />
+        <SectionLabel number="04" text="Our Achievements" />
 
         <div className="mt-12 text-center mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight max-w-4xl mx-auto italic">

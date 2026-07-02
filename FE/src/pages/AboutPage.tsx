@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { AboutHero } from '../components/about/AboutHero';
 import { AboutIntro } from '../components/about/AboutIntro';
-import { WhyChooseUs } from '../components/about/WhyChooseUs';
 import { FunFacts } from '../components/about/FunFacts';
 import { AboutServices } from '../components/about/AboutServices';
 import { PageDetailing } from '../components/ui/PageDetailing';
@@ -16,7 +15,6 @@ export const AboutPage = () => {
       <AboutIntro />
       <Team />
       <GoogleGeminiEffectDemo />
-      <WhyChooseUs />
       <FunFacts />
       <AboutServices />
     </main>

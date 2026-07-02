@@ -4,11 +4,16 @@ import { cn } from '../lib/utils';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MagneticButton } from './MagneticButton';
+import { SERVICES } from '../data/content';
 
 const NAV_LINKS = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  { label: 'Services', path: '/services' },
+  {
+    label: 'Services',
+    path: '/services',
+    children: SERVICES.map((s) => ({ label: s.title, path: `/services/${s.slug}` })),
+  },
   { label: 'Blog', path: '/blog' },
   { label: 'Contact', path: '/contact' },
 ];
@@ -17,6 +22,7 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -28,6 +34,7 @@ export const Header = () => {
   useEffect(() => {
     setMobileOpen(false);
     setDropdownOpen(false);
+    setMobileServicesOpen(false);
   }, [location]);
 
   return (
@@ -50,25 +57,20 @@ export const Header = () => {
           )}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group" onClick={(e) => {
+          <Link to="/" className="flex items-center group" onClick={(e) => {
             if (location.pathname === "/") {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}>
-            <motion.span
-              className="font-display font-bold text-lg md:text-xl tracking-tighter uppercase text-white"
-              whileHover={{ scale: 1.02 }}
-            >
-              POINT
-              <span className="inline-flex items-center justify-center w-6 h-6 bg-accent rounded text-background font-bold text-[10px] mx-[1px] align-middle shadow-lg">
-                5
-              </span>
-              <span className="text-white">MEDIA</span>
-            </motion.span>
-            <span className="hidden md:block text-[9px] uppercase tracking-[0.25em] text-accent/30 font-medium mt-0.5">
-              Productions
-            </span>
+            <motion.img
+              src="/logo.png"
+              alt="Point5 Media Logo"
+              className="h-10 md:h-12 w-auto object-contain"
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              style={{ filter: 'brightness(1) drop-shadow(0 0 8px rgba(196,239,23,0.25))' }}
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -79,7 +81,7 @@ export const Header = () => {
                   to={item.path}
                   className={cn(
                     "flex items-center gap-1 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] rounded-full transition-all duration-300",
-                    location.pathname === item.path
+                    location.pathname === item.path || (item.children && location.pathname.startsWith(item.path + '/'))
                       ? "text-background bg-accent shadow-[0_0_15px_rgba(196,239,23,0.3)]"
                       : "text-white/70 hover:text-accent hover:bg-white/5"
                   )}
@@ -105,14 +107,20 @@ export const Header = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 py-2 px-1 bg-background/95 backdrop-blur-xl rounded-xl border border-white/10 min-w-[200px] shadow-2xl"
+                        className="absolute top-full left-0 mt-2 py-2 px-1 bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 min-w-[240px] shadow-2xl z-50"
                       >
                         {item.children.map((child) => (
                           <Link
                             key={child.path}
                             to={child.path}
-                            className="block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-foreground/60 hover:text-accent hover:bg-accent/5 rounded-lg transition-all"
+                            className={cn(
+                              "flex items-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all",
+                              location.pathname === child.path
+                                ? "text-accent bg-accent/10"
+                                : "text-foreground/60 hover:text-accent hover:bg-accent/5"
+                            )}
                           >
+                            <span className="w-1 h-1 rounded-full bg-accent/40 flex-shrink-0" />
                             {child.label}
                           </Link>
                         ))}
@@ -165,23 +173,70 @@ export const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-center"
                 >
-                  <Link
-                    to={item.path}
-                    className={cn(
-                      "text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter py-3 transition-colors",
-                      location.pathname === item.path ? "text-accent" : "text-white/40 hover:text-accent"
-                    )}
-                    onClick={(e) => {
-                      setMobileOpen(false);
-                      if (location.pathname === item.path) {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.children ? (
+                    <div>
+                      <button
+                        className={cn(
+                          "text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter py-3 transition-colors flex items-center gap-3",
+                          location.pathname.startsWith(item.path) ? "text-accent" : "text-white/40 hover:text-accent"
+                        )}
+                        onClick={() => setMobileServicesOpen((prev) => !prev)}
+                      >
+                        {item.label}
+                        <ChevronDown className={cn("w-8 h-8 transition-transform", mobileServicesOpen && "rotate-180")} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileServicesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden flex flex-col items-center gap-1 mt-2"
+                          >
+                            <Link
+                              to={item.path}
+                              className="text-sm font-bold uppercase tracking-widest text-accent/60 hover:text-accent py-1 transition-colors"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              — All Services —
+                            </Link>
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.path}
+                                to={child.path}
+                                className={cn(
+                                  "text-base font-bold uppercase tracking-wider py-1 transition-colors",
+                                  location.pathname === child.path ? "text-accent" : "text-white/40 hover:text-accent"
+                                )}
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={cn(
+                        "text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter py-3 transition-colors block",
+                        location.pathname === item.path ? "text-accent" : "text-white/40 hover:text-accent"
+                      )}
+                      onClick={(e) => {
+                        setMobileOpen(false);
+                        if (location.pathname === item.path) {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>
