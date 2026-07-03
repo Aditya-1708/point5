@@ -1,14 +1,12 @@
-import { motion, useScroll, useTransform, useAnimationFrame } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Instagram, Facebook, Linkedin } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { COMPANY, HERO_BG } from '../data/content';
+import { COMPANY, HERO_STATS, HERO_BG } from '../data/content';
 import { KineticText } from './motion/KineticText';
 import { MagneticButton } from './MagneticButton';
 import { Spotlight } from './ui/Spotlight';
-import { BackgroundBeams } from './ui/BackgroundBeams';
 import { GridBackground } from './ui/GridBackground';
-import { EmeraldSphere3D } from './EmeraldSphere3D';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -31,8 +29,6 @@ const SOCIAL_ORBIT = [
   { icon: Facebook, href: COMPANY.socials.facebook, label: 'Facebook', angle: 288 },
 ];
 
-const ORBIT_SPEED = 0.05; // degrees per frame (~3 deg/sec at 60fps → full rotation ~120s)
-
 export const Hero = () => {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLElement>(null);
@@ -53,23 +49,23 @@ export const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden bg-background"
     >
       <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
-      <BackgroundBeams />
       <GridBackground className="opacity-20" />
 
-      {/* Background Image with Parallax */}
+      {/* Background Image with Parallax — camera gear flat-lay for a production-studio feel */}
       <motion.div style={{ y: isMobile ? 0 : bgY, scale: isMobile ? 1 : bgScale }} className="absolute inset-0 z-0">
-
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        <img
+          src={HERO_BG}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          style={{ objectPosition: 'center 38%' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
       </motion.div>
 
       {/* Noise overlay */}
       <div className="noise-bg absolute inset-0 z-[2]" />
-
-      {/* 3D Sphere Background */}
-      <div className="absolute inset-0 z-[1] flex items-center justify-center opacity-50 pointer-events-none">
-         <EmeraldSphere3D />
-      </div>
 
       {/* Main Content */}
       <motion.div
@@ -77,7 +73,7 @@ export const Hero = () => {
         className="relative z-10 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto w-full pt-24 flex flex-col md:flex-row items-center justify-between gap-12"
       >
         <div className="flex-1 text-left">
-          {/* Social tag */}
+          {/* What we do — instantly tells visitors what kind of agency this is */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,14 +81,15 @@ export const Hero = () => {
             className="text-accent text-xs uppercase tracking-[0.3em] font-bold mb-6 flex items-center gap-2"
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Lets explore new realms of creativity!
+            Media Production · Social Media · Digital Marketing
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline — value proposition, not the company name */}
           <motion.h1
-            className="text-[14vw] md:text-[7rem] lg:text-[8rem] font-display font-bold uppercase leading-[0.8] tracking-tighter mb-8 text-shadow-glow"
+            className="text-[10vw] md:text-[3.5rem] lg:text-[4.25rem] font-display font-bold uppercase leading-[0.95] tracking-tighter mb-6 text-shadow-glow"
           >
-            <KineticText className="block">POINT5MEDIA</KineticText>
+            <KineticText as="span" className="block">We make brands</KineticText>
+            <KineticText as="span" className="block text-accent" delay={0.05}>impossible to ignore</KineticText>
           </motion.h1>
 
           {/* Description */}
@@ -100,23 +97,44 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="max-w-xl text-foreground/70 text-base md:text-lg leading-relaxed font-medium mb-10"
+            className="max-w-xl text-foreground/70 text-base md:text-lg leading-relaxed font-medium mb-6"
           >
             {COMPANY.heroDescription}
           </motion.p>
 
-          {/* CTA */}
+          {/* Trust stats — quick proof before the ask */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="flex flex-wrap items-center gap-x-8 gap-y-4 mb-10"
+          >
+            {HERO_STATS.map((stat) => (
+              <div key={stat.label} className="flex items-baseline gap-2">
+                <span className="text-2xl md:text-3xl font-display font-bold text-accent">{stat.value}</span>
+                <span className="text-foreground/50 text-[10px] md:text-xs font-bold uppercase tracking-widest">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTAs — primary conversion + proof path */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
+            className="flex flex-wrap items-center gap-4"
           >
-            <Link to="/about">
-              <MagneticButton className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 text-foreground px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-accent hover:text-background transition-all duration-500 group shadow-2xl">
-                <span className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-background transition-transform group-hover:rotate-45">
+            <Link to="/contact">
+              <MagneticButton className="inline-flex items-center gap-3 bg-accent text-background px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:shadow-[0_0_30px_rgba(196,239,23,0.5)] transition-all duration-500 group shadow-2xl">
+                <span className="w-8 h-8 rounded-full bg-background flex items-center justify-center text-accent transition-transform group-hover:rotate-45">
                   <ArrowRight className="w-4 h-4" />
                 </span>
-                About Our Agency
+                Start Your Project
+              </MagneticButton>
+            </Link>
+            <Link to="/services">
+              <MagneticButton className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl border border-white/10 text-foreground px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white/10 hover:border-accent/30 transition-all duration-500 shadow-2xl">
+                See Our Work
               </MagneticButton>
             </Link>
           </motion.div>

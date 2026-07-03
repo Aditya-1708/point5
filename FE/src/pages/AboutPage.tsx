@@ -1,10 +1,9 @@
-import { motion } from 'motion/react';
 import { AboutHero } from '../components/about/AboutHero';
 import { AboutIntro } from '../components/about/AboutIntro';
 import { FunFacts } from '../components/about/FunFacts';
 import { AboutServices } from '../components/about/AboutServices';
 import { PageDetailing } from '../components/ui/PageDetailing';
-import GoogleGeminiEffectDemo from '../components/google-gemini-effect-demo';
+import { Founders } from '../components/home/Founders';
 import { Team } from '../components/about/Team';
 
 export const AboutPage = () => {
@@ -13,8 +12,8 @@ export const AboutPage = () => {
       <PageDetailing />
       <AboutHero />
       <AboutIntro />
+      <Founders />
       <Team />
-      <GoogleGeminiEffectDemo />
       <FunFacts />
       <AboutServices />
     </main>

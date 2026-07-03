@@ -40,7 +40,7 @@ export const BrandMarquee = () => {
             viewport={{ once: true }}
             className="text-foreground/30 text-[10px] font-bold uppercase tracking-[0.5em] text-center"
           >
-            Trusted by global brands &amp; industry leaders
+            Trusted by 50+ brands across FMCG, real estate, hospitality, fashion &amp; more
           </motion.p>
         </div>
 

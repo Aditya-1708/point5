@@ -1,49 +1,38 @@
 import { motion } from 'motion/react';
-import { Users, Lightbulb, Award, Clock } from 'lucide-react';
+import { Clapperboard, Share2, TrendingUp, Clock, type LucideIcon } from 'lucide-react';
+import { WHY_CHOOSE_US } from '../../data/content';
 import { Container } from '../layout/Container';
 import { Section } from '../layout/Section';
 import { cn } from '../../lib/utils';
 
-const features = [
-  {
-    title: 'Seamless Collaboration',
-    description: 'Transparent communication and feedback loops at every stage of the project.',
-    icon: Users,
-  },
-  {
-    title: 'Creative Ideas',
-    description: 'Fresh, innovative approaches tailored to make your brand unforgettable.',
-    icon: Lightbulb,
-  },
-  {
-    title: '2+ Years Experience',
-    description: 'Over 2 years of experience delivering innovative digital solutions.',
-    icon: Award,
-    extra: '99+ Happy clients',
-  },
-  {
-    title: '7 Day Turnaround',
-    description: 'Fast delivery without compromising on quality or creativity.',
-    icon: Clock,
-  },
-];
+const ICONS: Record<string, LucideIcon> = { Clapperboard, Share2, TrendingUp, Clock };
 
 export function Features() {
   return (
     <Section className="bg-background py-24 relative overflow-hidden">
-      <Container>
+      {/* Studio-shoot backdrop — kept faint so cards stay readable */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <img
+          src="/bts/studio-shoot.jpg"
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover opacity-[0.18]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/30 to-background" />
+      </div>
+      <Container className="relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-16">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight max-w-xl">
-            We are offering the best solutions
+            Why growing brands choose us
           </h2>
           <p className="text-foreground/60 font-medium leading-relaxed max-w-sm text-lg md:text-right">
-            We offer a full range of digital services to help your brand stand out, connect, and grow.
+            From the first shoot to full-funnel marketing — this is what working with one accountable team gets you.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => {
-            const Icon = feature.icon;
+          {WHY_CHOOSE_US.map((feature, i) => {
+            const Icon = ICONS[feature.icon] ?? Clapperboard;
             return (
               <motion.div
                 key={feature.title}
@@ -61,11 +50,11 @@ export function Features() {
                 </div>
                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
                 <p className="text-foreground/60 text-sm leading-relaxed mb-auto">
-                  {feature.description}
+                  {feature.desc}
                 </p>
-                {feature.extra && (
+                {feature.stat && (
                   <div className="mt-8 pt-6 border-t border-white/5 w-full">
-                    <p className="text-[#C4EF17] font-bold text-sm">{feature.extra}</p>
+                    <p className="text-[#C4EF17] font-bold text-sm">{feature.stat}</p>
                   </div>
                 )}
               </motion.div>

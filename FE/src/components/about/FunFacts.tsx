@@ -17,11 +17,11 @@ export const FunFacts = () => {
         <SectionLabel number="04" text="Our Achievements" />
 
         <div className="mt-12 text-center mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight max-w-4xl mx-auto italic">
-            <TextReveal>"A streamlined solution build to power business."</TextReveal>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight max-w-4xl mx-auto">
+            <TextReveal>The numbers behind the work</TextReveal>
           </h2>
           <p className="text-foreground/40 text-lg mt-8 max-w-2xl mx-auto">
-            We’re more than pixels and code — we’re coffee lovers, cat people, meme sharers, and design geeks.
+            Three years of consistent delivery for brands across India — measured, not claimed.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export const FunFacts = () => {
               className="p-10 rounded-3xl bg-white/[0.03] border border-white/10 text-center group hover:bg-accent transition-all duration-500"
             >
               <h3 className="text-5xl md:text-6xl font-bold font-display mb-2 text-white group-hover:text-black transition-colors">
-                {fact.number}
+                {fact.value}{fact.suffix}
               </h3>
               <p className="text-foreground/40 text-sm font-mono uppercase tracking-widest group-hover:text-black/60 transition-colors">
                 {fact.label}

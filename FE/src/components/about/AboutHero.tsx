@@ -1,10 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import { HERO_BG } from '../../data/content';
-import { EmeraldSphere3D } from '../EmeraldSphere3D';
 import { Cover } from '../ui/cover';
-import { TextReveal } from '../TextReveal';
 
 export const AboutHero = () => {
   return (
@@ -43,15 +39,18 @@ export const AboutHero = () => {
               className="mb-16"
             >
               <Cover containerClassName="w-full py-12 md:py-20 bg-white/[0.01] border-y border-white/5">
-                <h1 className="text-[12vw] md:text-8xl lg:text-[10rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
-                  Defining the <br /> <span className="text-accent italic">Future</span>
+                <h1 className="text-[12vw] md:text-8xl lg:text-[9rem] font-bold font-display tracking-tighter text-white leading-[0.8] uppercase">
+                  The team behind <br /> <span className="text-accent italic">the stories</span>
                 </h1>
               </Cover>
             </motion.div>
-            
+
             <div className="max-w-2xl mx-auto">
-              <p className="text-foreground/50 text-lg md:text-xl leading-relaxed font-medium mb-16 italic">
-                We are a multidisciplinary team of creative minds passionate about crafting visual stories and digital experiences that push the boundaries of what's possible.
+              <p className="text-foreground/50 text-lg md:text-xl leading-relaxed font-medium mb-16">
+                Point 5 Media is a Varanasi-based media production and digital
+                marketing agency. Since 2022, we've helped 50+ brands get seen,
+                remembered, and chosen — with films, campaigns, and social media
+                that actually convert.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 w-full px-4">
@@ -72,52 +71,6 @@ export const AboutHero = () => {
               </div>
             </div>
           </motion.div>
-
-          {/* Right Visual - 3D Sphere & HUD */}
-          <div className="relative h-[500px] hidden lg:flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.2 }}
-              className="w-full h-full relative"
-            >
-              {/* HUD Detailing Overlay */}
-              <div className="absolute inset-0 z-10 pointer-events-none">
-                {/* Rotating Outer Ring */}
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-10 border border-accent/10 rounded-full border-dashed" 
-                />
-                <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-20 border border-white/5 rounded-full" 
-                />
-                
-                {/* Coordinate Labels */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 text-[10px] font-mono text-accent/40 uppercase tracking-widest">
-                  Lat: 25.4358° N
-                </div>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-mono text-accent/40 uppercase tracking-widest">
-                  Lon: 81.8463° E
-                </div>
-                
-                {/* Decorative Brackets */}
-                <div className="absolute top-1/4 left-10 w-4 h-20 border-l border-t border-b border-white/20" />
-                <div className="absolute bottom-1/4 right-10 w-4 h-20 border-r border-t border-b border-white/20" />
-              </div>
-
-              {/* The 3D Sphere */}
-              <EmeraldSphere3D />
-              
-              {/* Hover Instructions */}
-              <div className="absolute bottom-10 right-0 text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] flex items-center gap-2">
-                <span className="w-10 h-[1px] bg-white/10" />
-                Dwell to activate core
-              </div>
-            </motion.div>
-          </div>
 
         </div>
       </div>

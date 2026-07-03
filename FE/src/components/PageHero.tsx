@@ -20,10 +20,16 @@ export const PageHero = ({ title, accentTitle, breadcrumb }: PageHeroProps) => {
 
   return (
     <section ref={ref} className="relative min-h-[70vh] flex items-start md:items-center overflow-hidden pt-36 md:pt-32 pb-20 bg-background">
-      {/* Parallax Background */}
+      {/* Parallax Background — faint camera imagery for a production-studio feel */}
       <motion.div style={{ y, scale, filter: `blur(${blur}px)` }} className="absolute inset-0 z-0">
+        <img
+          src="/bts/dslr-hands.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.22] grayscale"
+        />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />
       </motion.div>
 
       {/* Content */}

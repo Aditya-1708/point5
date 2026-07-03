@@ -32,7 +32,7 @@ export const ServicesPage = () => {
           <ServiceCards />
           
           <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/10 to-transparent" />
-          <ProcessSteps />
+          <ProcessSteps sectionNumber="03" />
         </div>
       </div>
 

@@ -11,7 +11,7 @@ export const COMPANY = {
   address: "Plot No. 575/A, Manas Nagar Extension Durgakund, Varanasi, Uttar Pradesh – 221005, India",
   hours: "Monday – Saturday: 10:00 AM – 08:00 PM",
   heroDescription:
-    "A multidisciplinary creative consultancy and a results-driven digital marketing agency that assists brands in growing, connecting, and thriving in the digital world. We specialize in creating engaging campaigns and building strong social media brands that bring ideas to life.",
+    "We are a full-service media production and digital marketing agency. From brand films and product shoots to social media management and paid campaigns — we create content that gets your brand seen, remembered, and chosen.",
   aboutDescription:
     "At Point 5 Media Productions, we believe that every story deserves to be seen, felt, and remembered. We are a creative agency crafting high-impact visual content — from brand reels, ad films, and corporate shoots to event highlights and wedding films — designed to captivate, engage, and convert.\n\nOver the last 3 years, we've partnered with 50+ brands and individuals, transforming their ideas into visually stunning experiences. Our portfolio proudly includes projects with Uttar Pradesh Police, the Indian Army (39 GTC), YouTube documentaries, podcasts, and a diverse range of commercial and creative ventures.",
   socials: {
@@ -562,27 +562,70 @@ export const MISSION_CARDS = [
 
 export const WHY_CHOOSE_US = [
   {
-    title: "Seamless Collaboration",
-    desc: "Transparent communication and feedback loops at every stage of the project.",
-    icon: "Users",
+    title: "End-to-End Production",
+    desc: "Strategy, scripting, shoots, edits, and publishing — one in-house team owns your entire content pipeline, so nothing gets lost between vendors.",
+    icon: "Clapperboard",
   },
   {
-    title: "Creative Ideas",
-    desc: "Fresh, innovative approaches tailored to make your brand unforgettable.",
-    icon: "Lightbulb",
+    title: "Platform-Native Content",
+    desc: "Reels, shorts, carousels, and ad creatives built for how each platform actually ranks content — not one video resized five ways.",
+    icon: "Share2",
   },
   {
-    title: "2+ Years Experience",
-    desc: "Over 2 years of experience delivering innovative digital solutions.",
-    stat: "99+ Happy clients",
-    icon: "Award",
+    title: "Results You Can Measure",
+    desc: "Monthly reporting on reach, engagement, and leads generated — so you always know what your marketing budget is doing.",
+    stat: "10M+ organic views generated",
+    icon: "TrendingUp",
   },
   {
-    title: "7 Day Turnaround",
-    desc: "Fast delivery without compromising on quality or creativity.",
+    title: "7-Day Turnaround",
+    desc: "Campaign-ready content delivered in days, not months — without compromising on quality or creativity.",
     icon: "Clock",
   },
 ];
+
+// Trust stats shown in the hero — quick proof points for first-time visitors
+export const HERO_STATS = [
+  { value: "50+", label: "Brands Scaled" },
+  { value: "10M+", label: "Views Generated" },
+  { value: "95%", label: "Client Retention" },
+];
+
+// Industries served — shown on the homepage so visitors self-identify fast
+export const INDUSTRIES = [
+  { label: "Hotels & Cafés", icon: "Coffee" },
+  { label: "Real Estate & Interiors", icon: "Building2" },
+  { label: "FMCG & D2C Brands", icon: "ShoppingBag" },
+  { label: "Jewellery & Lifestyle", icon: "Gem" },
+  { label: "Fashion & Apparel", icon: "Shirt" },
+  { label: "Healthcare & Clinics", icon: "Stethoscope" },
+  { label: "Education & Coaching", icon: "GraduationCap" },
+  { label: "Events & Weddings", icon: "PartyPopper" },
+];
+
+// Business types for the free-consultation form dropdown
+export const BUSINESS_TYPES = [
+  "Hotel / Café / Restaurant",
+  "Real Estate / Interiors",
+  "FMCG / D2C Brand",
+  "Jewellery / Fashion / Lifestyle",
+  "Healthcare / Clinic",
+  "Education / Coaching",
+  "Events / Weddings",
+  "Other",
+];
+
+// About page — founding story + mission/vision (dummy copy, replace with final content)
+export const ABOUT_STORY = {
+  heading: "Why Point 5 Media exists",
+  paragraphs: [
+    "Point 5 Media started in 2022 in Varanasi with one camera, two people, and a simple frustration: local businesses were doing great work, but nobody could see it. Their social pages were inactive, their photos didn't do them justice, and agencies from big cities felt out of reach.",
+    "So we built the agency we wished existed — one team that could shoot the film, design the brand, run the campaigns, and be accountable for actual business results, not vanity metrics. What started with wedding films and small shoots has grown into full brand-building partnerships.",
+    "Three years in, we've partnered with 50+ brands across FMCG, real estate, jewellery, hospitality, and fashion — plus institutions like Uttar Pradesh Police and the Indian Army (39 GTC). The belief hasn't changed: every brand has a story worth seeing.",
+  ],
+  missionCallout:
+    "Our mission is simple: help brands stand out online, tell their story with craft, and turn attention into measurable growth — without needing a big-city agency budget.",
+};
 
 export const FUN_FACTS = [
   { value: 95, suffix: "%", label: "Customer satisfaction" },
@@ -611,9 +654,24 @@ export const FAQS = [
     answer:
       "We've seen clear evidence that our clients' organic reach begins to grow soon after partnering with us. While paid digital campaigns can deliver instant results, strategies like content marketing and SEO require consistency and patience. These long-term efforts typically take a few months to show measurable impact — but the results are sustainable and rewarding.",
   },
+  {
+    question: "How much do your services cost?",
+    answer:
+      "Every brand's needs are different, so we price per project or as a monthly retainer depending on scope. After a free discovery call, you receive a detailed proposal within 48 hours covering deliverables, timelines, and pricing — no hidden costs and no long lock-ins.",
+  },
+  {
+    question: "Which industries do you work with?",
+    answer:
+      "We've partnered with 50+ brands across FMCG, real estate, jewellery, hospitality, healthcare, fashion, food & beverage, tourism, and events — plus institutions like Uttar Pradesh Police and the Indian Army (39 GTC). If your brand needs to be seen, we can build the content and campaigns to make it happen.",
+  },
+  {
+    question: "How do we get started?",
+    answer:
+      "Send us a message through the contact form or WhatsApp. We reply within 4 hours, set up a free discovery call to understand your goals and audience, and share a custom proposal within 48 hours. From there, most projects kick off within a week.",
+  },
 ];
 
-export const HERO_BG = "/hero/Point5-Media-Productions-Main-Banner.jpg";
+export const HERO_BG = "/hero/camera-flatlay.jpg";
 
 export const BLOG_POSTS = [
   {

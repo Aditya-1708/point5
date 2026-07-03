@@ -1,119 +1,128 @@
-import {motion} from 'motion/react';
-import {Link} from 'react-router-dom';
-import {ArrowRight} from 'lucide-react';
-import {SERVICES} from '@/src/data/content';
-import {SectionLabel} from '@/src/components/SectionLabel';
-import {Container} from '@/src/components/layout/Container';
-import {Section} from '@/src/components/layout/Section';
-import {KineticText} from '@/src/components/motion/KineticText';
-import {cn} from '@/src/lib/utils';
-import {useLayoutEffect, useRef} from 'react';
-import {useScrollTypeLink} from '@/src/motion/useScrollTypeLink';
-import {ensureGsap} from '@/src/motion/gsap';
-import {useReducedMotion} from '@/src/motion/useReducedMotion';
+import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
+import {
+  ArrowRight,
+  Palette,
+  Share2,
+  TrendingUp,
+  Camera,
+  Heart,
+  Video,
+  Monitor,
+  type LucideIcon,
+} from 'lucide-react';
+import { SERVICES } from '@/src/data/content';
+import { SectionLabel } from '@/src/components/SectionLabel';
+import { Container } from '@/src/components/layout/Container';
+import { Section } from '@/src/components/layout/Section';
+
+const ICONS: Record<string, LucideIcon> = {
+  Palette,
+  Share2,
+  TrendingUp,
+  Camera,
+  Heart,
+  Video,
+  Monitor,
+};
 
 export function Services() {
-  const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const sectionRef = useRef<HTMLElement | null>(null);
-  useScrollTypeLink(headingRef);
-  const reducedMotion = useReducedMotion();
-
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const heading = headingRef.current;
-    if (!section || !heading || reducedMotion) return;
-
-    const {gsap} = ensureGsap();
-    const ctx = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=420',
-          scrub: true,
-          pin: heading,
-          pinSpacing: true,
-        },
-      })
-        .to(heading, {y: -60, opacity: 0.25, ease: 'none'}, 0)
-        .to(heading, {scale: 0.92, ease: 'none'}, 0);
-    }, section);
-
-    return () => ctx.revert();
-  }, [reducedMotion]);
-
   return (
-    <Section ref={sectionRef as any} className="bg-background overflow-hidden">
+    <Section className="bg-background overflow-hidden">
       <Container>
-        <div className="flex flex-col md:flex-row items-end justify-between gap-10 mb-14">
-          <div className="max-w-2xl">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="flex justify-center">
             <SectionLabel number="02" text="Services" />
-            <h2
-              ref={headingRef}
-              className="text-5xl md:text-7xl font-bold font-display uppercase tracking-tighter leading-none"
-            >
-              <KineticText as="span" className="block">
-                What we do
-              </KineticText>
-              <KineticText as="span" className="block text-white/20" delay={0.05}>
-                for your brand
-              </KineticText>
-            </h2>
           </div>
-          <div className="max-w-md">
-            <p className="text-foreground/60 font-medium leading-relaxed">
-              Strategy, story, and craft—built to stop the scroll and grow your audience with consistency.
-            </p>
-          </div>
+          <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tighter leading-none mb-5">
+            Everything your brand needs{' '}
+            <span className="text-accent">to get noticed</span>
+          </h2>
+          <p className="text-foreground/60 font-medium leading-relaxed">
+            One partner for branding, content production, social media, and
+            performance marketing — strategy to execution, in-house.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {SERVICES.map((s, i) => (
-            <motion.div
-              key={s.slug}
-              initial={{opacity: 0, y: 24}}
-              whileInView={{opacity: 1, y: 0}}
-              viewport={{once: true, margin: '-80px'}}
-              transition={{delay: i * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1]}}
-              className={cn(
-                'group relative rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden',
-                'hover:border-accent/20 transition-colors duration-500',
-              )}
-            >
-              <div className="p-8 md:p-10">
-                <div className="flex items-center justify-between gap-6 mb-7">
-                  <div className="text-accent text-xs font-bold uppercase tracking-[0.3em]">
-                    {String(i + 1).padStart(2, '0')}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {SERVICES.map((s, i) => {
+            const Icon = ICONS[s.icon] ?? Camera;
+            return (
+              <motion.div
+                key={s.slug}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: (i % 3) * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-7 md:p-8 hover:border-accent/25 hover:bg-white/[0.04] transition-all duration-300 flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/15 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-background transition-colors duration-300">
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <div className="h-px flex-1 bg-white/10 group-hover:bg-accent/20 transition-colors" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/25">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold font-display uppercase tracking-tighter mb-4">
+                <h3 className="text-xl md:text-2xl font-bold font-display tracking-tight mb-3">
                   {s.title}
                 </h3>
-                <p className="text-foreground/60 font-medium leading-relaxed mb-8">
+                <p className="text-foreground/55 text-sm leading-relaxed mb-6 line-clamp-3">
                   {s.shortDesc}
                 </p>
 
+                {s.features.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {s.features.slice(0, 4).map((f) => (
+                      <span
+                        key={f}
+                        className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/8 text-foreground/40"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
                 <Link
                   to={`/services/${s.slug}`}
-                  className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-foreground/80 hover:text-foreground transition-colors"
+                  className="mt-auto inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent hover:gap-3.5 transition-all"
                 >
-                  <span className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-background group-hover:border-accent/30 transition-all">
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                  View details
+                  Explore service
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
+              </motion.div>
+            );
+          })}
 
-              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-accent/10 blur-[80px]" />
-              </div>
-            </motion.div>
-          ))}
+          {/* Filler card that converts — grid is 7 services + this = 8 */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ delay: 0.16, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-3xl bg-accent p-7 md:p-8 flex flex-col justify-between min-h-[240px]"
+          >
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold font-display tracking-tight text-background mb-3">
+                Not sure what your brand needs?
+              </h3>
+              <p className="text-background/70 text-sm leading-relaxed font-medium">
+                Tell us your goals on a free 30-minute consultation and we'll
+                recommend the right mix — no commitments.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-background hover:gap-3.5 transition-all"
+            >
+              Get a free consultation
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </Container>
     </Section>
   );
 }
-

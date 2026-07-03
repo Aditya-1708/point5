@@ -1,93 +1,128 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { Target, Eye, ArrowRight } from 'lucide-react';
 import { SectionLabel } from '../SectionLabel';
 import { TextReveal } from '../TextReveal';
-import { Target, Eye, Handshake, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { CardBody, CardContainer, CardItem } from '../ui/3d-card';
-import { COMPANY, MISSION_CARDS, FOUNDERS } from '../../data/content';
-import { GlareCard } from '../ui/glare-card';
-
-const ICONS: Record<string, any> = { Target, Eye, Handshake };
+import { ABOUT_STORY, MISSION_CARDS } from '../../data/content';
 
 export const AboutIntro = () => {
+  const mission = MISSION_CARDS[0];
+  const vision = MISSION_CARDS[1];
+
   return (
     <section className="py-24 px-6 md:px-12 relative bg-black">
       <div className="max-w-7xl mx-auto">
-        <SectionLabel number="01" text="About Us" />
+        <SectionLabel number="01" text="Our Story" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mt-12 mb-24">
-          {/* Left Column - Text */}
-          <div className="flex flex-col gap-10">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tighter leading-tight mb-8">
-                <TextReveal>Elevating brands through digital design.</TextReveal>
-              </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mt-10">
+          {/* Left — the founding story */}
+          <div>
+            <h2 className="text-4xl md:text-6xl font-bold font-display tracking-tighter leading-tight mb-8">
+              <TextReveal>{ABOUT_STORY.heading}</TextReveal>
+            </h2>
 
-              <div className="space-y-6">
-                {COMPANY.aboutDescription.split('\n\n').map((para, i) => (
-                  <motion.p
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + i * 0.1 }}
-                    className="text-foreground/60 text-lg md:text-xl leading-relaxed"
-                  >
-                    {para}
-                  </motion.p>
-                ))}
-              </div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="mt-10"
-              >
-                <Link 
-                  to="/contact"
-                  className="inline-flex items-center gap-3 text-accent font-bold uppercase tracking-widest hover:gap-5 transition-all group"
+            <div className="space-y-6 mb-10">
+              {ABOUT_STORY.paragraphs.map((para, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + i * 0.1 }}
+                  className="text-foreground/60 text-base md:text-lg leading-relaxed"
                 >
-                  Get in touch
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
+                  {para}
+                </motion.p>
+              ))}
             </div>
+
+            {/* Mission callout */}
+            <motion.blockquote
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="border-l-2 border-accent bg-accent/5 rounded-r-2xl p-6 md:p-8 mb-10"
+            >
+              <p className="text-foreground/85 text-base md:text-lg leading-relaxed font-medium">
+                {ABOUT_STORY.missionCallout}
+              </p>
+              <footer className="mt-4 text-accent text-xs font-bold uppercase tracking-widest">
+                — Sumedha Pathak, Founder &amp; CEO
+              </footer>
+            </motion.blockquote>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 text-accent font-bold uppercase tracking-widest text-xs hover:gap-5 transition-all"
+            >
+              Work with us
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          {/* Right Column - Mission Cards with 3D Effect */}
-          <div className="grid grid-cols-1 gap-4">
-            {MISSION_CARDS.map((card, i) => {
-              const Icon = ICONS[card.icon] || Target;
-              return (
-                <CardContainer key={card.title} className="inter-var w-full py-0">
-                  <CardBody className="relative group/card bg-white/[0.02] border border-white/5 w-full h-auto rounded-3xl p-8 md:p-10 hover:border-accent/20 transition-all">
-                    <div className="flex flex-col md:flex-row gap-8 items-start">
-                      <CardItem translateZ="50" className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover/card:bg-accent group-hover/card:text-black transition-all shadow-xl">
-                        <Icon className="w-8 h-8" />
-                      </CardItem>
-                      <div className="flex-1">
-                        <CardItem translateZ="60" className="text-2xl font-bold font-display mb-3 group-hover/card:text-accent transition-colors">
-                          {card.title}
-                        </CardItem>
-                        <CardItem translateZ="40" className="text-foreground/50 text-lg leading-relaxed">
-                          {card.desc}
-                        </CardItem>
-                      </div>
-                    </div>
-                    
-                    {/* Corner detailing */}
-                    <div className="absolute top-4 right-4 opacity-10 group-hover/card:opacity-30 transition-opacity">
-                      <div className="text-[10px] font-mono uppercase tracking-widest text-accent">0{i+1}</div>
-                    </div>
-                  </CardBody>
-                </CardContainer>
-              );
-            })}
+          {/* Right — mission & vision, stated plainly */}
+          <div className="flex flex-col gap-5 lg:sticky lg:top-32">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 md:p-10 hover:border-accent/20 transition-colors"
+            >
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                  <Target className="w-6 h-6" />
+                </div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+                  Our Mission
+                </h3>
+              </div>
+              <p className="text-foreground/70 text-lg md:text-xl leading-relaxed font-medium">
+                {mission.desc}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="rounded-3xl border border-white/5 bg-white/[0.02] p-8 md:p-10 hover:border-accent/20 transition-colors"
+            >
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                  <Eye className="w-6 h-6" />
+                </div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+                  Our Vision
+                </h3>
+              </div>
+              <p className="text-foreground/70 text-lg md:text-xl leading-relaxed font-medium">
+                {vision.desc}
+              </p>
+            </motion.div>
+
+            {/* BTS image card — real production feel instead of abstract art */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="rounded-3xl overflow-hidden border border-white/5 relative aspect-[16/9]"
+            >
+              <img
+                src="/bts/videographer.jpg"
+                alt="Point 5 Media crew on set"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <p className="absolute bottom-4 left-5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70">
+                On set — every frame in-house
+              </p>
+            </motion.div>
           </div>
         </div>
-
       </div>
     </section>
   );

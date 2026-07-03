@@ -93,7 +93,7 @@ export const Founders = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
           <div>
-            <SectionLabel number="08" text="Founders" />
+            <SectionLabel number="02" text="Founders" />
             <h2
               ref={headingRef}
               className="text-5xl md:text-7xl font-bold font-display uppercase tracking-tighter leading-none text-white"
