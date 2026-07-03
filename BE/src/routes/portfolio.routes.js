@@ -34,6 +34,8 @@ portfolioRouter.get("/:id", getPortfolioCardById);
 
 portfolioRouter.post(
   "/",
+  authenticate,
+  requireAdmin,
   uploadPortfolioLogo.single("logo"),
   createPortfolioCard,
 );

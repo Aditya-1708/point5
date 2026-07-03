@@ -7,12 +7,14 @@ export const createContact = async (req, res) => {
       fullName,
       email,
       phoneNumber,
+      businessType,
       subject,
       projectInfo,
     } = req.body;
 
-    // Basic validation
-    if (!fullName || !email || !subject || !projectInfo) {
+    // Required fields match the non-optional columns on the Contact model;
+    // phoneNumber, businessType, and projectInfo are optional there too.
+    if (!fullName || !email || !subject) {
       return res.status(400).json({
         success: false,
         error: "Please fill all required fields",
@@ -24,8 +26,9 @@ export const createContact = async (req, res) => {
         fullName: fullName.trim(),
         email: email.trim().toLowerCase(),
         phoneNumber: phoneNumber || null,
+        businessType: businessType || null,
         subject: subject.trim(),
-        projectInfo: projectInfo.trim(),
+        projectInfo: projectInfo ? projectInfo.trim() : null,
       },
     });
 

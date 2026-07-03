@@ -29,6 +29,7 @@ model Contact {
   fullName    String
   email       String
   phoneNumber String?
+  businessType String?
   subject     String
   projectInfo String? @db.Text
 
