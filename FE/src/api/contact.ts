@@ -15,6 +15,8 @@ export interface Contact {
 
   phoneNumber?: string;
 
+  businessType?: string;
+
   subject?: string;
 
   projectInfo?: string;
@@ -31,9 +33,11 @@ export interface CreateContactPayload {
 
   phoneNumber?: string;
 
+  businessType?: string;
+
   subject: string;
 
-  projectInfo: string;
+  projectInfo?: string;
 }
 
 /* =========================================================
@@ -72,6 +76,8 @@ const normalizeContact = (value: unknown): Contact | null => {
     email: toOptionalString(value.email),
 
     phoneNumber: toOptionalString(value.phoneNumber),
+
+    businessType: toOptionalString(value.businessType),
 
     subject: toOptionalString(value.subject),
 

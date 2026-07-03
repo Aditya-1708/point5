@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { MagneticButton } from "../MagneticButton";
 import { Send, CheckCircle } from "lucide-react";
-import axiosInstance from "../../lib/axiosInstance";
+import { createContact } from "../../api/contact";
 
 export const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -35,9 +35,9 @@ export const ContactForm = () => {
       setLoading(true);
       setError("");
 
-      const response = await axiosInstance.post("/contacts", formData);
+      const response = await createContact(formData);
 
-      if (response.data.success) {
+      if (response.success) {
         setSubmitted(true);
 
         setFormData({

@@ -7,9 +7,11 @@ interface MagneticButtonProps {
   className?: string;
   onClick?: () => void;
   strength?: number;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export const MagneticButton = ({ children, className = '', onClick, strength = 0.3 }: MagneticButtonProps) => {
+export const MagneticButton = ({ children, className = '', onClick, strength = 0.3, disabled, type }: MagneticButtonProps) => {
   const isMobile = useIsMobile();
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
@@ -38,6 +40,8 @@ export const MagneticButton = ({ children, className = '', onClick, strength = 0
         ref={ref}
         onClick={onClick}
         className={className}
+        disabled={disabled}
+        type={type}
       >
         {children}
       </button>
@@ -53,6 +57,8 @@ export const MagneticButton = ({ children, className = '', onClick, strength = 0
       onClick={onClick}
       className={className}
       whileTap={{ scale: 0.95 }}
+      disabled={disabled}
+      type={type}
     >
       {children}
     </motion.button>

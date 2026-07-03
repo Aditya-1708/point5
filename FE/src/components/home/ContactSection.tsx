@@ -4,7 +4,7 @@ import { useState } from "react";
 import { COMPANY, BUSINESS_TYPES } from "@/src/data/content";
 import { Container } from "@/src/components/layout/Container";
 import { Section } from "@/src/components/layout/Section";
-import axiosInstance from "@/src/lib/axiosInstance";
+import { createContact } from "@/src/api/contact";
 
 const NEXT_STEPS = [
   {
@@ -38,23 +38,16 @@ export function ContactSection() {
 
       const form = e.currentTarget;
 
-      const phone = (form.elements.namedItem("phone") as HTMLInputElement).value;
-      const businessType = (form.elements.namedItem("businessType") as HTMLSelectElement).value;
-      const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-
-      const formData = {
+      const response = await createContact({
         fullName: (form.elements.namedItem("name") as HTMLInputElement).value,
-
         email: (form.elements.namedItem("email") as HTMLInputElement).value,
-
+        phoneNumber: (form.elements.namedItem("phone") as HTMLInputElement).value,
+        businessType: (form.elements.namedItem("businessType") as HTMLSelectElement).value,
         subject: "Free Consultation Request",
+        projectInfo: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      });
 
-        projectInfo: `Business type: ${businessType} | Phone: ${phone}${message ? ` | ${message}` : ""}`,
-      };
-
-      const response = await axiosInstance.post("/contacts", formData);
-
-      if (response.data.success) {
+      if (response.success) {
         setSubmitted(true);
 
         form.reset();

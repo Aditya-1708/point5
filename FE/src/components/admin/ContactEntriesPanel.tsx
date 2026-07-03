@@ -140,6 +140,14 @@ export const ContactEntriesPanel = () => {
                   </div>
 
                   <div>
+                    <p className="text-sm text-white/40 mb-1">Business Type</p>
+
+                    <p className="text-white/80">
+                      {contact.businessType || "-"}
+                    </p>
+                  </div>
+
+                  <div>
                     <p className="text-sm text-white/40 mb-1">Submitted On</p>
 
                     <p className="text-white/80">
