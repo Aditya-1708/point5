@@ -404,6 +404,9 @@ export interface Service {
   fullDesc: string;
   features: string[];
   icon: string;
+  image: string;
+  bestFor: string;
+  popular?: boolean;
 }
 
 export const SERVICES: Service[] = [
@@ -422,6 +425,8 @@ export const SERVICES: Service[] = [
       "Brand Guidelines",
     ],
     icon: "Palette",
+    image: "/services/branding.jpg",
+    bestFor: "New brands & rebrands",
   },
 
   {
@@ -440,6 +445,9 @@ export const SERVICES: Service[] = [
       "Google My Business",
     ],
     icon: "Share2",
+    image: "/services/social-media.jpg",
+    bestFor: "Consistent monthly growth",
+    popular: true,
   },
 
   {
@@ -450,8 +458,11 @@ export const SERVICES: Service[] = [
       "Our digital marketing services blend SEO, Google Ads, and Meta Ads to boost visibility, reach the right audience, and drive measurable, sustainable growth for your brand.",
     fullDesc:
       "Our digital marketing services blend SEO, Google Ads, and Meta Ads to boost visibility, reach the right audience, and drive measurable, sustainable growth for your brand.",
-    features: ["SEO", "Google Ads", "Meta Ads"],
+    features: ["SEO", "Google Ads", "Meta Ads", "Monthly Reporting"],
     icon: "TrendingUp",
+    image: "/services/digital-marketing.jpg",
+    bestFor: "Leads & measurable ROI",
+    popular: true,
   },
 
   {
@@ -462,8 +473,15 @@ export const SERVICES: Service[] = [
       "Our brand and product shoots create high-quality, concept-driven visuals that highlight your brand identity and product details — perfect for websites, social media, and marketing campaigns, while boosting brand value and engagement.",
     fullDesc:
       "Our brand and product shoots create high-quality, concept-driven visuals that highlight your brand identity and product details — perfect for websites, social media, and marketing campaigns, while boosting brand value and engagement.",
-    features: [],
+    features: [
+      "Concept & Styling",
+      "Studio Shoots",
+      "On-Location Shoots",
+      "Edited, Ready-to-Post Assets",
+    ],
     icon: "Camera",
+    image: "/services/product-shoots.jpg",
+    bestFor: "Product launches & catalogs",
   },
 
   {
@@ -474,8 +492,15 @@ export const SERVICES: Service[] = [
       "Our wedding photography and videography capture timeless emotions through candid moments, genuine expressions, and beautifully composed visuals — preserving every detail of your special day with care and creativity.",
     fullDesc:
       "Our wedding photography and videography capture timeless emotions through candid moments, genuine expressions, and beautifully composed visuals — preserving every detail of your special day with care and creativity.",
-    features: [],
+    features: [
+      "Cinematic Wedding Films",
+      "Candid Photography",
+      "Pre-Wedding Shoots",
+      "Full Albums & Reels",
+    ],
     icon: "Heart",
+    image: "/services/wedding.jpg",
+    bestFor: "Couples & families",
   },
 
   {
@@ -486,8 +511,15 @@ export const SERVICES: Service[] = [
       "Our event photography and videography capture key moments and energy with professional, creative coverage — delivering compelling visuals that reflect the true essence of your event.",
     fullDesc:
       "Our event photography and videography capture key moments and energy with professional, creative coverage — delivering compelling visuals that reflect the true essence of your event.",
-    features: [],
+    features: [
+      "Full Event Coverage",
+      "Highlight Reels",
+      "Corporate & Launches",
+      "Same-Week Delivery",
+    ],
     icon: "Video",
+    image: "/services/events.jpg",
+    bestFor: "Corporate & social events",
   },
 
   {
@@ -498,8 +530,15 @@ export const SERVICES: Service[] = [
       "Our website development and management services deliver responsive, user-friendly websites that look great, work seamlessly, and support your brand's growth.",
     fullDesc:
       "Our website development and management services deliver responsive, user-friendly websites that look great, work seamlessly, and support your brand's growth.",
-    features: [],
+    features: [
+      "Design & Development",
+      "Mobile Responsive",
+      "SEO-Ready Build",
+      "Ongoing Maintenance",
+    ],
     icon: "Monitor",
+    image: "/services/website.jpg",
+    bestFor: "New online presence",
   },
 ];
 
