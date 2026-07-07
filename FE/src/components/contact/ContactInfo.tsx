@@ -1,63 +1,65 @@
 import { motion } from 'motion/react';
+import { Instagram, Facebook, Linkedin, Twitter, MessageCircle } from 'lucide-react';
 import { COMPANY } from '../../data/content';
-import { MapPin, Phone, Clock } from 'lucide-react';
 
-const INFO_CARDS = [
-  {
-    icon: MapPin,
-    title: 'Office Address',
-    content: COMPANY.address,
-  },
-  {
-    icon: Phone,
-    title: 'Quick Support',
-    content: `Phone: ${COMPANY.phones.join(', ')}\nEmail: ${COMPANY.email}`,
-  },
-  {
-    icon: Clock,
-    title: 'Business Hours',
-    content: COMPANY.hours,
-  },
+const PROOF_STATS = [
+  { value: '50+', label: 'Brands Served' },
+  { value: '3+', label: 'Years of Craft' },
+  { value: '25+', label: 'Pages Managed Daily' },
+  { value: '10M+', label: 'Organic Views' },
+];
+
+const SOCIAL_LINKS = [
+  { icon: Instagram, href: COMPANY.socials.instagram, label: 'Instagram' },
+  { icon: Linkedin, href: COMPANY.socials.linkedin, label: 'LinkedIn' },
+  { icon: Facebook, href: COMPANY.socials.facebook, label: 'Facebook' },
+  { icon: Twitter, href: COMPANY.socials.twitter, label: 'Twitter' },
+  { icon: MessageCircle, href: COMPANY.socials.whatsapp, label: 'WhatsApp' },
 ];
 
 export const ContactInfo = () => {
   return (
-    <section className="px-6 md:px-12 pb-32">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {INFO_CARDS.map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass rounded-[2rem] p-10 group hover:border-accent/40 transition-all duration-700 relative overflow-hidden shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-              <div className="relative z-10">
-                <motion.div
-                  className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-inner group-hover:bg-accent group-hover:text-background transition-all duration-500"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                >
-                  <card.icon className="w-8 h-8 text-accent group-hover:text-background transition-colors" />
-                </motion.div>
-
-                <h3 className="text-xl font-bold font-display uppercase mb-4 text-foreground tracking-tight group-hover:translate-x-1 transition-transform">
-                  {card.title}
-                </h3>
-
-                {card.content.split('\n').map((line, j) => (
-                  <p key={j} className="text-foreground/50 text-base font-medium leading-relaxed italic mb-1 group-hover:text-foreground/80 transition-colors">
-                    {line}
-                  </p>
-                ))}
+    <section className="px-6 md:px-12 pb-28">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto rounded-3xl border border-white/8 bg-white/[0.02] px-8 py-8 md:px-12 md:py-10 flex flex-col lg:flex-row items-center justify-between gap-8"
+      >
+        <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-x-12 gap-y-6">
+          {PROOF_STATS.map((stat) => (
+            <div key={stat.label} className="text-center md:text-left">
+              <div className="text-2xl md:text-3xl font-display font-bold text-accent leading-none mb-1">
+                {stat.value}
               </div>
-            </motion.div>
+              <div className="text-foreground/45 text-[10px] font-bold uppercase tracking-widest">
+                {stat.label}
+              </div>
+            </div>
           ))}
         </div>
-      </div>
+
+        <div className="flex flex-col items-center lg:items-end gap-3">
+          <p className="text-foreground/40 text-[11px] font-bold uppercase tracking-widest">
+            See our daily work
+          </p>
+          <div className="flex items-center gap-2.5">
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.04] flex items-center justify-center text-foreground/60 hover:text-background hover:bg-accent hover:border-accent transition-colors"
+              >
+                <social.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

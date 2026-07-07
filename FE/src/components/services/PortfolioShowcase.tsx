@@ -1,11 +1,49 @@
 import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { MessageCircle, Instagram } from "lucide-react";
 
 import { SectionLabel } from "../SectionLabel";
-import { STATIC_PORTFOLIO_CARDS } from "../../data/content";
+import { STATIC_PORTFOLIO_CARDS, COMPANY } from "../../data/content";
 
 import { usePortfolio } from "../../hooks/usePortfolio";
+
+// Empty state that still converts: instead of a dead "no items" box,
+// invite the visitor to request samples directly.
+const SamplesCTA = () => (
+  <div className="mt-12 rounded-3xl border border-accent/15 bg-gradient-to-br from-accent/[0.06] to-transparent p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-8">
+    <div className="flex-1">
+      <h3 className="text-xl md:text-2xl font-bold font-display uppercase tracking-tight text-foreground mb-2">
+        Want to see recent samples?
+      </h3>
+      <p className="text-foreground/55 text-sm md:text-base leading-relaxed max-w-lg">
+        Our latest projects for this service are being added to the site.
+        Message us and we'll send fresh samples for your industry — usually
+        within the hour.
+      </p>
+    </div>
+    <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
+      <a
+        href={COMPANY.socials.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 bg-accent text-background px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(196,239,23,0.4)] transition-all"
+      >
+        <MessageCircle className="w-4 h-4" />
+        Get Samples on WhatsApp
+      </a>
+      <a
+        href={COMPANY.socials.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-accent/30 transition-all"
+      >
+        <Instagram className="w-4 h-4" />
+        See Instagram
+      </a>
+    </div>
+  </div>
+);
 
 interface PortfolioShowcaseProps {
   serviceType: any;
@@ -205,11 +243,7 @@ export const PortfolioShowcase = ({
       return (
         <div className="mb-20">
           <SectionLabel number={sectionNumber} text={sectionTitle} />
-          <div className="mt-12 glass rounded-3xl border border-white/5 p-12 text-center">
-            <p className="text-foreground/40 text-sm md:text-base font-medium italic">
-              No portfolio items currently available for this service.
-            </p>
-          </div>
+          <SamplesCTA />
         </div>
       );
     }
@@ -231,11 +265,7 @@ export const PortfolioShowcase = ({
       <div className="mb-20">
         <SectionLabel number={sectionNumber} text={sectionTitle} />
 
-        <div className="mt-12 glass rounded-3xl border border-white/5 p-12 text-center">
-          <p className="text-foreground/40 text-sm md:text-base font-medium italic">
-            No portfolio items currently available for this service.
-          </p>
-        </div>
+        <SamplesCTA />
       </div>
     );
   }

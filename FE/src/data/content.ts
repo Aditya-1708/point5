@@ -407,6 +407,25 @@ export interface Service {
   image: string;
   bestFor: string;
   popular?: boolean;
+  /** One-line value proposition shown in the service page hero */
+  heroTagline: string;
+  /** Three proof chips shown under the hero CTAs */
+  stats: { value: string; label: string }[];
+  /** Outcome-oriented bullets — what the client walks away with */
+  outcomes: string[];
+  /** Service-specific process, 4 compact steps */
+  steps: { title: string; desc: string }[];
+  /** Objection-handling FAQs specific to this service */
+  faqs: { question: string; answer: string }[];
+  /** Visual result cards shown right after the hero (services without an embed showcase) */
+  impactCases?: {
+    client: string;
+    industry: string;
+    metric: string;
+    metricLabel: string;
+    how: string;
+    image: string;
+  }[];
 }
 
 export const SERVICES: Service[] = [
@@ -427,6 +446,29 @@ export const SERVICES: Service[] = [
     icon: "Palette",
     image: "/services/branding.jpg",
     bestFor: "New brands & rebrands",
+    heroTagline: "An identity people remember — everywhere they see you.",
+    stats: [
+      { value: "50+", label: "Brands Built" },
+      { value: "2–3 wks", label: "Typical Delivery" },
+      { value: "100%", label: "File Ownership" },
+    ],
+    outcomes: [
+      "A logo and visual system that works everywhere — packaging, reels, hoardings, and web",
+      "Brand guidelines your whole team (and future vendors) can actually follow",
+      "A voice and story that separates you from lookalike competitors",
+      "Launch-ready assets for social, print, and web from day one",
+    ],
+    steps: [
+      { title: "Discovery & Positioning", desc: "We study your market, competitors, and customers to find the space only you can own." },
+      { title: "Concept Directions", desc: "You get 2–3 distinct identity directions with logo, color, and type — not one take-it-or-leave-it option." },
+      { title: "Refinement", desc: "Structured revision rounds on your chosen direction until every detail feels right." },
+      { title: "Guidelines & Handover", desc: "Full brand book, source files, and every export format — you own all of it." },
+    ],
+    faqs: [
+      { question: "What if I already have a logo?", answer: "We audit what you have first. If it's working, we build the system around it; if it's holding you back, we evolve it without losing the recognition you've earned." },
+      { question: "How many concepts and revisions do I get?", answer: "You'll see 2–3 distinct directions, then structured revision rounds on the one you pick. We iterate until it's right — the rounds are a process, not a paywall." },
+      { question: "Do I own the final files?", answer: "Completely. Source files, exports in every format, and the brand guidelines — no lock-in, no 'contact us for the original files' surprises later." },
+    ],
   },
 
   {
@@ -448,6 +490,29 @@ export const SERVICES: Service[] = [
     image: "/services/social-media.jpg",
     bestFor: "Consistent monthly growth",
     popular: true,
+    heroTagline: "Your feed, handled — strategy, content, posting, and growth.",
+    stats: [
+      { value: "10M+", label: "Organic Views" },
+      { value: "30+", label: "Posts / Month" },
+      { value: "95%", label: "Client Retention" },
+    ],
+    outcomes: [
+      "A consistent, platform-native feed — reels, carousels, and stories that fit how each platform ranks content",
+      "A monthly content calendar you approve before anything goes live",
+      "Growth reports that show reach, engagement, and enquiries — not vanity numbers",
+      "Your time back: no more 'what do we post today?'",
+    ],
+    steps: [
+      { title: "Brand & Audience Audit", desc: "We study your page, your competitors, and what your audience actually engages with." },
+      { title: "Content Calendar", desc: "A month of planned posts, reels, and stories — you review and approve everything upfront." },
+      { title: "Production & Posting", desc: "Shoots, edits, captions, hashtags, scheduling — fully handled by one team." },
+      { title: "Report & Refine", desc: "Monthly performance review; we double down on what's working and cut what isn't." },
+    ],
+    faqs: [
+      { question: "Do I have to appear in the content?", answer: "Only if you want to. Founder-led content performs well, but we also build strong pages around products, behind-the-scenes, customers, and storytelling formats that don't need you on camera." },
+      { question: "How much of my time will this need?", answer: "About an hour a month to approve the calendar, plus shoot days when needed. Everything else — ideation, production, posting, replies strategy — is on us." },
+      { question: "When will I see growth?", answer: "Engagement quality typically improves within the first month; meaningful follower and enquiry growth compounds over 3–6 months of consistency. We show you the trend line every month so nothing is a black box." },
+    ],
   },
 
   {
@@ -463,6 +528,55 @@ export const SERVICES: Service[] = [
     image: "/services/digital-marketing.jpg",
     bestFor: "Leads & measurable ROI",
     popular: true,
+    heroTagline: "Ads and SEO that pay for themselves — tracked to the rupee.",
+    stats: [
+      { value: "100+", label: "Leads / Campaign" },
+      { value: "Weekly", label: "Spend Reports" },
+      { value: "SEO+Ads", label: "Full Funnel" },
+    ],
+    outcomes: [
+      "Qualified enquiries — calls, WhatsApp messages, and form fills — not just clicks",
+      "Campaigns and landing pages aligned, so the traffic you pay for actually converts",
+      "Transparent weekly reports: what was spent, what it returned",
+      "Retargeting that brings back the buyers who almost said yes",
+    ],
+    steps: [
+      { title: "Audit & Goals", desc: "We define what a lead is worth to you and set a target cost per lead before spending a rupee." },
+      { title: "Campaign Setup", desc: "Audiences, creatives, pixels, and tracking — built properly so every result is measurable." },
+      { title: "Optimize Weekly", desc: "We kill underperforming ads fast and shift budget to what's converting." },
+      { title: "Scale Winners", desc: "Once cost per lead is stable, we scale spend and expand into SEO for long-term compounding." },
+    ],
+    faqs: [
+      { question: "What budget do I need to start?", answer: "We've run effective local campaigns starting from modest daily budgets — what matters is matching the budget to your goal. On the free consultation we'll tell you honestly what your target needs, and if ads aren't the right first move, we'll say so." },
+      { question: "How fast will I see leads?", answer: "Paid campaigns typically generate enquiries within the first week of going live. SEO is slower — a few months — but keeps bringing leads after you stop paying for clicks. We usually run both in parallel." },
+      { question: "Who owns the ad account and data?", answer: "You do. We build campaigns in your ad accounts, so all history, audiences, and learnings stay with you even if we part ways." },
+    ],
+    impactCases: [
+      {
+        client: "Gungun Green Properties",
+        industry: "Real Estate",
+        metric: "60+",
+        metricLabel: "site-visit leads in 90 days",
+        how: "Meta lead campaigns with a WhatsApp follow-up funnel that qualified buyers before the first call.",
+        image: "/services/digital-marketing.jpg",
+      },
+      {
+        client: "Aura Beauty Expo",
+        industry: "Events & Exhibitions",
+        metric: "2.5×",
+        metricLabel: "ticket enquiries vs last edition",
+        how: "Geo-targeted Meta ads plus reels retargeting in the final two weeks before the event.",
+        image: "/services/events.jpg",
+      },
+      {
+        client: "The Tea Castle",
+        industry: "Food & Beverage",
+        metric: "38%",
+        metricLabel: "lower cost per enquiry",
+        how: "Google + Meta split testing that moved budget to the creatives people actually clicked.",
+        image: "/services/social-media.jpg",
+      },
+    ],
   },
 
   {
@@ -482,6 +596,55 @@ export const SERVICES: Service[] = [
     icon: "Camera",
     image: "/services/product-shoots.jpg",
     bestFor: "Product launches & catalogs",
+    heroTagline: "Product visuals that make people stop scrolling and start buying.",
+    stats: [
+      { value: "100+", label: "Shoots Delivered" },
+      { value: "48 hrs", label: "Edit Turnaround" },
+      { value: "Studio+", label: "On-Location Too" },
+    ],
+    outcomes: [
+      "Scroll-stopping catalog and campaign imagery shot to a concept, not just on a white background",
+      "A consistent visual language across every product and platform",
+      "Ready-to-post crops for Instagram, website, marketplace listings, and print",
+      "Both raw and edited files delivered — yours to keep",
+    ],
+    steps: [
+      { title: "Concept & Moodboard", desc: "We plan the look — styling, props, lighting — around where the images will be used." },
+      { title: "Shoot Day", desc: "Studio or on-location, with styling and art direction handled by our team." },
+      { title: "Edit & Retouch", desc: "Color, cleanup, and retouching that keeps products looking real — and premium." },
+      { title: "Delivery in Every Format", desc: "Crops and exports sized for each platform, delivered within 48 hours of the edit lock." },
+    ],
+    faqs: [
+      { question: "Do you provide models and styling?", answer: "Yes — we arrange models, styling, and props based on the concept and budget. For lifestyle shoots we handle casting; for product-only shoots our team does full styling and art direction." },
+      { question: "Where does the shoot happen?", answer: "Either in studio or at your location — cafés, showrooms, and outdoor shoots are all common. We recommend the setup that fits your product after the concept call." },
+      { question: "How many final images do I get?", answer: "It depends on the package we scope together, but you'll know the exact deliverable count — finals, crops, and formats — before the shoot day, so there are no surprises." },
+    ],
+    impactCases: [
+      {
+        client: "Swarnaavya",
+        industry: "Jewellery",
+        metric: "10k+",
+        metricLabel: "followers in launch month",
+        how: "Premium campaign shoot and launch creatives that positioned a new brand as heritage-luxury from day one.",
+        image: "/services/product-shoots.jpg",
+      },
+      {
+        client: "Kashi Kravings",
+        industry: "FMCG",
+        metric: "3×",
+        metricLabel: "engagement on product posts",
+        how: "Concept-led product shoots designed for the feed — not white-background catalog shots.",
+        image: "/services/branding.jpg",
+      },
+      {
+        client: "Magadh Delight",
+        industry: "FMCG",
+        metric: "20%",
+        metricLabel: "lift in retail adoption",
+        how: "Packaging-forward catalog shoot that made the range stand out on shelf and online.",
+        image: "/hero/camera-flatlay.jpg",
+      },
+    ],
   },
 
   {
@@ -501,6 +664,55 @@ export const SERVICES: Service[] = [
     icon: "Heart",
     image: "/services/wedding.jpg",
     bestFor: "Couples & families",
+    heroTagline: "Your day, told like a film — candid, cinematic, timeless.",
+    stats: [
+      { value: "200+", label: "Events Covered" },
+      { value: "7 days", label: "Teaser Delivery" },
+      { value: "4–6 wks", label: "Full Film" },
+    ],
+    outcomes: [
+      "A cinematic highlight film you'll rewatch for decades — not a three-hour recording nobody opens",
+      "Candid photography that catches real moments, not just staged lineups",
+      "A teaser reel within a week — perfect for sharing while the celebration is still fresh",
+      "Every ritual covered respectfully, without a camera crew taking over your day",
+    ],
+    steps: [
+      { title: "Meet & Plan", desc: "We understand your families, rituals, and the moments that matter most to you." },
+      { title: "Coverage Plan", desc: "Shot lists, crew, and timing mapped to every event — haldi to reception." },
+      { title: "The Day Itself", desc: "A calm, unobtrusive crew that knows when to direct and when to disappear." },
+      { title: "Edit & Delivery", desc: "Teaser in 7 days, full film and albums in 4–6 weeks, everything in shareable formats." },
+    ],
+    faqs: [
+      { question: "Do you travel outside Varanasi?", answer: "Yes — we cover weddings across India. Travel and stay are scoped transparently in the proposal, so the total cost is clear before you book." },
+      { question: "How many photographers and videographers will be there?", answer: "Depends on the scale — a typical wedding gets a multi-person crew covering both sides, candid and traditional. We'll recommend the right crew size on the planning call." },
+      { question: "Can we get the raw footage too?", answer: "Yes. The edited film and albums are the hero deliverables, but raw photos and footage can be included in your package if you want everything." },
+    ],
+    impactCases: [
+      {
+        client: "S + A, Varanasi",
+        industry: "Palace Wedding",
+        metric: "1M+",
+        metricLabel: "views on the wedding teaser",
+        how: "A cinematic teaser cut for social sharing — delivered while the celebrations were still on.",
+        image: "/services/wedding.jpg",
+      },
+      {
+        client: "Three-Day Celebration",
+        industry: "Haldi to Reception",
+        metric: "7 days",
+        metricLabel: "to teaser delivery",
+        how: "Multi-crew coverage of every ritual, candid and film, without taking over the day.",
+        image: "/bts/videographer.jpg",
+      },
+      {
+        client: "Mahajan Greens",
+        industry: "Wedding Venue",
+        metric: "2×",
+        metricLabel: "venue enquiries after the film",
+        how: "A venue showcase film and reels that sold the experience, not just the lawns.",
+        image: "/services/events.jpg",
+      },
+    ],
   },
 
   {
@@ -520,6 +732,29 @@ export const SERVICES: Service[] = [
     icon: "Video",
     image: "/services/events.jpg",
     bestFor: "Corporate & social events",
+    heroTagline: "Every launch, concert, and conference — captured while it matters.",
+    stats: [
+      { value: "Same wk", label: "Highlight Delivery" },
+      { value: "Multi-cam", label: "Coverage" },
+      { value: "UP Police", label: "& Indian Army Trusted" },
+    ],
+    outcomes: [
+      "A highlight reel ready for social media within days — while the buzz is still alive",
+      "Full coverage of keynotes, launches, and crowd moments across multiple cameras",
+      "Photos ready for press, sponsors, and marketing decks",
+      "An aftermovie that sells tickets and sponsors for your next event",
+    ],
+    steps: [
+      { title: "Brief & Shot List", desc: "We map the run-of-show and lock the must-capture moments with your team." },
+      { title: "Coverage Plan", desc: "Camera positions, crew count, and audio — planned so nothing gets missed." },
+      { title: "Event Day", desc: "A coordinated crew that captures the energy without getting in the way." },
+      { title: "Fast Edit & Delivery", desc: "Social-ready highlights within the week; full coverage and photos right after." },
+    ],
+    faqs: [
+      { question: "Can you cover an event on short notice?", answer: "Often, yes — message us on WhatsApp with the date and city and we'll confirm crew availability the same day." },
+      { question: "Can you post stories and reels during the event?", answer: "Yes — live social coverage is available as an add-on, so your audience sees the event while it's happening, not a week later." },
+      { question: "Who owns the footage, and can sponsors use it?", answer: "You get full usage rights for your brand, press, and sponsors. We'll flag anything that needs special clearance before delivery." },
+    ],
   },
 
   {
@@ -539,6 +774,55 @@ export const SERVICES: Service[] = [
     icon: "Monitor",
     image: "/services/website.jpg",
     bestFor: "New online presence",
+    heroTagline: "A website that loads fast, looks premium, and brings enquiries.",
+    stats: [
+      { value: "2–4 wks", label: "To Launch" },
+      { value: "Mobile", label: "First Builds" },
+      { value: "Ongoing", label: "Maintenance" },
+    ],
+    outcomes: [
+      "A fast, mobile-first website that looks as premium as your brand deserves",
+      "SEO-ready structure so Google can actually find and rank you",
+      "Enquiry forms and WhatsApp buttons wired in — the site works as a salesperson",
+      "Ongoing maintenance, so it never quietly breaks or goes stale",
+    ],
+    steps: [
+      { title: "Scope & Sitemap", desc: "We map the pages and enquiries the site needs to drive — before any design." },
+      { title: "Design", desc: "A look that matches your brand, reviewed and approved by you page by page." },
+      { title: "Build & Test", desc: "Fast, responsive, and tested on real phones — not just a designer's laptop." },
+      { title: "Launch & Maintain", desc: "We handle deployment, and stick around for updates, backups, and fixes." },
+    ],
+    faqs: [
+      { question: "I already have a website — can you redesign it?", answer: "Yes. We audit what's working, keep the SEO equity you've built, and rebuild the experience. Most redesigns launch within 2–4 weeks." },
+      { question: "Do you handle domain and hosting?", answer: "We can — either on your accounts (recommended, you keep ownership) or fully managed by us. Either way, costs are transparent." },
+      { question: "What happens after launch?", answer: "Our management plan covers updates, content changes, backups, and monitoring — or we hand over clean documentation if your team wants to run it in-house." },
+    ],
+    impactCases: [
+      {
+        client: "Gungun Green Properties",
+        industry: "Real Estate",
+        metric: "40%",
+        metricLabel: "more enquiries from the site",
+        how: "An enquiry-first redesign — WhatsApp buttons and forms wired into every property page.",
+        image: "/services/website.jpg",
+      },
+      {
+        client: "The Tea Castle",
+        industry: "Food & Beverage",
+        metric: "<1s",
+        metricLabel: "mobile load time",
+        how: "Rebuilt on a modern stack so the menu opens before the customer loses interest.",
+        image: "/services/digital-marketing.jpg",
+      },
+      {
+        client: "Panchsheel Hospital",
+        industry: "Healthcare",
+        metric: "Top 3",
+        metricLabel: "Google rank for key services",
+        how: "SEO-ready rebuild plus Google Business alignment for the searches patients actually make.",
+        image: "/bts/dslr-hands.jpg",
+      },
+    ],
   },
 ];
 
